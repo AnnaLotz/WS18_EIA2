@@ -8,8 +8,8 @@ namespace A00 {
         if (name == "Dein Name" || name == null) {
             name = "misteriöser unbekannter";
         }       
-        console.log("Hallo " + name + ", wie geht es dir?");
-        document.getElementById("helloBox").innerHTML = "Hallo " + name + ", wie geht es dir?";
+        console.log("Hallo " + name + ", viel Erfolg bei EIA2!");
+        document.getElementById("helloBox").innerHTML = "Hallo " + name + ", viel Erfolg bei EIA2!";
     }
 
 }
