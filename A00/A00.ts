@@ -5,7 +5,7 @@ namespace A00 {
     function greet(): void {
         let name: string = prompt("Wie heißt du?", "Dein Name");
         
-        if (name == "Dein Name") {
+        if (name == "Dein Name" || name == null) {
             name = "misteriöser unbekannter";
         }       
         console.log("Hallo " + name + ", wie geht es dir?");

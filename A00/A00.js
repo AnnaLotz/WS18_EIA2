@@ -3,7 +3,7 @@ var A00;
     document.addEventListener("DOMContentLoaded", greet);
     function greet() {
         let name = prompt("Wie heißt du?", "Dein Name");
-        if (name == "Dein Name") {
+        if (name == "Dein Name" || name == null) {
             name = "misteriöser unbekannter";
         }
         console.log("Hallo " + name + ", wie geht es dir?");
