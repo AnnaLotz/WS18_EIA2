@@ -18,5 +18,4 @@ function whatsTheWeatherLike(): void {
 }
 
 
-
 //    let a: string = "12";
