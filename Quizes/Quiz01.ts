@@ -1,3 +1,37 @@
+let bewertung: string = "B";
+
+switch (bewertung) {
+    case "A":
+        console.log("Sehr gut");
+        break;
+    case "B":
+        console.log("Gut");
+        break;
+    case "C":
+        console.log("Befriedigend");
+        break;
+    case "D":
+        console.log("Ausreichend");
+        break;
+    default:
+        console.log("Nicht Bestanden");
+        break;
+}
+
+
+
+
+
+let a: number = 20;
+let b: number;
+
+b = a % 15;
+
+
+
+
+
+/* =====L01=====
 document.addEventListener("DOMContentLoaded", whatsTheWeatherLike);
 
 let season: string[] = ["spring", "summer", "autumn", "winter"];
@@ -17,5 +51,5 @@ function whatsTheWeatherLike(): void {
 
 }
 
-
-//    let a: string = "12";
+    let a: string = "12";
+*/
