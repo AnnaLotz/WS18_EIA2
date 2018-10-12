@@ -19,7 +19,7 @@ switch (bewertung) {
 let a = 20;
 let b;
 b = a % 15;
-/* =====L01=====
+/* =====L00=====
 document.addEventListener("DOMContentLoaded", whatsTheWeatherLike);
 
 let season: string[] = ["spring", "summer", "autumn", "winter"];
