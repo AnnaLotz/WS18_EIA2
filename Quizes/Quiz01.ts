@@ -1,3 +1,5 @@
+/* =====L01===== */
+
 let bewertung: string = "B";
 
 switch (bewertung) {
@@ -19,16 +21,10 @@ switch (bewertung) {
 }
 
 
-
-
-
 let a: number = 20;
 let b: number;
 
 b = a % 15;
-
-
-
 
 
 /* =====L00=====
