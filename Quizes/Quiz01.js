@@ -1,3 +1,4 @@
+/* =====L01===== */
 let bewertung = "B";
 switch (bewertung) {
     case "A":
