@@ -1,6 +1,6 @@
 var L02;
 (function (L02) {
-    let allCards = [[], []];
+    let allCards = [];
     let color;
     let value;
     for (let i = 0; i < 5; i++) {
@@ -26,27 +26,31 @@ var L02;
             for (let k = 0; k < 4; k++) {
                 value = "+4";
                 allCards.push([color], [value]);
-            }
-            for (let k = 0; k < 4; k++) {
                 value = "choose Color";
                 allCards.push([color], [value]);
             }
         }
         else {
             for (let j = 0; j < 10; j++) {
-                //let v: number = 0;
                 value = j.toString();
                 allCards.push([color], [value]);
             }
             for (let j = 1; j < 10; j++) {
-                //let v: number = 0;
                 value = j.toString();
+                allCards.push([color], [value]);
+            }
+            for (let j = 0; j < 2; j++) {
+                value = "+2";
+                allCards.push([color], [value]);
+                value = "skip";
+                allCards.push([color], [value]);
+                value = "reverse";
                 allCards.push([color], [value]);
             }
         }
     }
     for (let i = 0; i < allCards.length; i++)
         console.log(allCards[i]);
-    console.log(allCards.length / 2);
+    console.log("Anzahl Karten: " + allCards.length / 2);
 })(L02 || (L02 = {})); //namespace zu
 //# sourceMappingURL=index.js.map
