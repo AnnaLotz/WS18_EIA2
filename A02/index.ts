@@ -20,23 +20,30 @@ namespace L02 {
                 color = "#ffff00"; //yellow
                 break;
             case 4:
-                color = "#000000";
+                color = "#000000"; //black
                 break;
         }
 
-        for (let j: number = 0; j < 10; j++) {
-            //let v: number = 0;
-            value = j.toString();
-            allCards.push([color], [value]);
-        }
-
-        for (let k: number = 0; k < 4; k++) {
-            for (let l: number = 0; l < 2; l++) {
-                if (l === 0) {
-                    value = "+4";
-                } else {
-                    value = "choose Color";
-                }
+        //black cards:
+        if (color == "#000000") {
+            for (let k: number = 0; k < 4; k++) {
+                value = "+4";
+                allCards.push([color], [value]);
+            }
+            for (let k: number = 0; k < 4; k++) {
+                value = "choose Color";
+                allCards.push([color], [value]);
+            }
+        //colored cards:
+        } else {
+            for (let j: number = 0; j < 10; j++) {
+                //let v: number = 0;
+                value = j.toString();
+                allCards.push([color], [value]);
+            }
+            for (let j: number = 1; j < 10; j++) {
+                //let v: number = 0;
+                value = j.toString();
                 allCards.push([color], [value]);
             }
         }
@@ -46,7 +53,7 @@ namespace L02 {
 
     for (let i: number = 0; i < allCards.length; i++)
         console.log(allCards[i]);
-    
+
     console.log(allCards.length / 2);
 
 
