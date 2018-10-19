@@ -1,0 +1,16 @@
+.stack {
+	width: 49.5%;
+	height: 10em;
+	float: left;
+	background-color: green;
+	border: 0.01em solid black;
+	padding: 0.1em;
+}
+
+#player {
+	width: 99.5%;
+	height: 25em;
+	float: left;
+	background-color: pink;
+	border: 0.01em solid black;
+}
