@@ -1,7 +1,7 @@
 var L02;
 (function (L02) {
     document.addEventListener("DOMContentLoaded", main);
-    let allCards = [];
+    let deck = [];
     let color;
     let value;
     let card;
@@ -12,13 +12,13 @@ var L02;
     function createDivs() {
         //for schleife prompt
         card = document.createElement("div");
-        card.innerText = allCards[1][0];
+        card.innerText = deck[1][1];
         document.getElementById("player").appendChild(card);
         card = document.createElement("div");
-        card.innerText = allCards[65][0];
+        card.innerText = deck[65][1];
         document.getElementById("player").appendChild(card);
-        console.log(allCards[1]);
-        console.log(allCards[1][0]);
+        console.log(deck[7]);
+        console.log(deck[7][0]);
     }
     function createCards() {
         for (let i = 0; i < 5; i++) {
@@ -43,33 +43,33 @@ var L02;
             if (color == "#000000") {
                 for (let k = 0; k < 4; k++) {
                     value = "+4";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]); // deck.push({color=color,value=value});
                     value = "choose Color";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
             }
             else {
                 for (let j = 0; j < 10; j++) {
                     value = j.toString();
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
                 for (let j = 1; j < 10; j++) {
                     value = j.toString();
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
                 for (let j = 0; j < 2; j++) {
                     value = "+2";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                     value = "skip";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                     value = "reverse";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
             }
         }
         //        for (let i: number = 0; i < allCards.length; i++)
         //            console.log(allCards[i]);
-        console.log("Anzahl Karten: " + allCards.length / 2);
+        console.log("Anzahl Karten: " + deck.length);
     } //createCards zu
 })(L02 || (L02 = {})); //namespace zu
 //# sourceMappingURL=index.js.map

@@ -2,7 +2,7 @@ namespace L02 {
 
     document.addEventListener("DOMContentLoaded", main);
 
-    let allCards: string[][] = [];
+    let deck: string[][] = [];
     let color: string;
     let value: string;
 
@@ -17,14 +17,14 @@ namespace L02 {
         
         //for schleife prompt
         card = document.createElement("div");
-        card.innerText = allCards[1][0];
+        card.innerText = deck[1][1];
         document.getElementById("player").appendChild(card);
         card = document.createElement("div");
-        card.innerText = allCards[65][0];
+        card.innerText = deck[65][1];
         document.getElementById("player").appendChild(card);
         
-        console.log(allCards[1]);
-        console.log(allCards[1][0]);
+        console.log(deck[7]);
+        console.log(deck[7][0]);
     }
 
     function createCards(): void {
@@ -51,27 +51,27 @@ namespace L02 {
             if (color == "#000000") {
                 for (let k: number = 0; k < 4; k++) {
                     value = "+4";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]); // deck.push({color=color,value=value});
                     value = "choose Color";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
                 //colored cards:
             } else {
                 for (let j: number = 0; j < 10; j++) {
                     value = j.toString();
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
                 for (let j: number = 1; j < 10; j++) {
                     value = j.toString();
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
                 for (let j: number = 0; j < 2; j++) {
                     value = "+2";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                     value = "skip";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                     value = "reverse";
-                    allCards.push([color], [value]);
+                    deck.push([color, value]);
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace L02 {
 //        for (let i: number = 0; i < allCards.length; i++)
 //            console.log(allCards[i]);
 
-        console.log("Anzahl Karten: " + allCards.length / 2);
+        console.log("Anzahl Karten: " + deck.length);
     } //createCards zu
 
 
