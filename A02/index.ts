@@ -8,23 +8,25 @@ namespace L02 {
 
     let card: HTMLDivElement;
 
+
     function main(): void {
+        
+        let startCards: number;
+        startCards = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));
+
         createCards();
-        createDivs();
+        drawCards(startCards);
     } //main zu
 
-    function createDivs(): void {
-        
-        //for schleife prompt
-        card = document.createElement("div");
-        card.innerText = deck[1][1];
-        document.getElementById("player").appendChild(card);
-        card = document.createElement("div");
-        card.innerText = deck[65][1];
-        document.getElementById("player").appendChild(card);
-        
-        console.log(deck[7]);
-        console.log(deck[7][0]);
+    function drawCards(_startnum: number): void {
+
+        for (let i: number = _startnum; i > 0; i--) {
+            let r: number = Math.floor(Math.random() * deck.length);
+            card = document.createElement("div");
+            card.innerText = deck[r][1];
+            document.getElementById("player").appendChild(card);
+        }
+
     }
 
     function createCards(): void {
@@ -75,11 +77,6 @@ namespace L02 {
                 }
             }
         }
-
-//        for (let i: number = 0; i < allCards.length; i++)
-//            console.log(allCards[i]);
-
-        console.log("Anzahl Karten: " + deck.length);
     } //createCards zu
 
 
