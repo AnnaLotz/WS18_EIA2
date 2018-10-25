@@ -6,28 +6,18 @@ namespace L02 {
     let color: string;
     let value: string;
 
-    let card: HTMLDivElement;
 
 
     function main(): void {
-        
+
         let startCards: number;
         startCards = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));
 
         createCards();
         drawCards(startCards);
+
     } //main zu
 
-    function drawCards(_startnum: number): void {
-
-        for (let i: number = _startnum; i > 0; i--) {
-            let r: number = Math.floor(Math.random() * deck.length);
-            card = document.createElement("div");
-            card.innerText = deck[r][1];
-            document.getElementById("player").appendChild(card);
-        }
-
-    }
 
     function createCards(): void {
         for (let i: number = 0; i < 5; i++) {
@@ -53,7 +43,7 @@ namespace L02 {
             if (color == "#000000") {
                 for (let k: number = 0; k < 4; k++) {
                     value = "+4";
-                    deck.push([color, value]); // deck.push({color=color,value=value});
+                    deck.push([color, value]);
                     value = "choose Color";
                     deck.push([color, value]);
                 }
@@ -80,7 +70,22 @@ namespace L02 {
     } //createCards zu
 
 
+    function drawCards(_startnum: number): void {
 
+        let card: HTMLDivElement;
+        for (let i: number = _startnum; i > 0; i--) {
+            let r: number = Math.floor(Math.random() * (deck.length - 1));
+            card = document.createElement("div");
+            card.innerText = deck[r][1];
+            card.style.background = deck[r][0];
+            //wenn farbe Schwarz oder blau: schriftfarbe weiß
+            if (deck[r][0] == "#000000" || deck[r][0] == "#0000ff")
+                card.style.color = "white";
+            document.getElementById("player").appendChild(card);
+            deck.splice(r, 1);
+        }
+
+    } //drawCards zu
 
 
 
