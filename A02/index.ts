@@ -5,8 +5,7 @@ namespace L02 {
     let deck: string[][] = [];
     let color: string;
     let value: string;
-
-
+    let card: HTMLDivElement;
 
     function main(): void {
 
@@ -15,9 +14,9 @@ namespace L02 {
 
         createCards();
         drawCards(startCards);
+        startCard();
 
     } //main zu
-
 
     function createCards(): void {
         for (let i: number = 0; i < 5; i++) {
@@ -69,25 +68,43 @@ namespace L02 {
         }
     } //createCards zu
 
-
     function drawCards(_startnum: number): void {
 
-        let card: HTMLDivElement;
+
         for (let i: number = _startnum; i > 0; i--) {
             let r: number = Math.floor(Math.random() * (deck.length - 1));
             card = document.createElement("div");
+            card.setAttribute("class", "card");
             card.innerText = deck[r][1];
             card.style.background = deck[r][0];
             //wenn farbe Schwarz oder blau: schriftfarbe weiß
             if (deck[r][0] == "#000000" || deck[r][0] == "#0000ff")
                 card.style.color = "white";
+
             document.getElementById("player").appendChild(card);
+
             deck.splice(r, 1);
         }
 
     } //drawCards zu
+    
+    function startCard(): void {
 
+        let r: number = Math.floor(Math.random() * (deck.length - 1));
+        card = document.createElement("div");
+        card.setAttribute("class", "card");
+        card.innerText = deck[r][1];
+        card.style.background = deck[r][0];
+        //wenn farbe Schwarz oder blau: schriftfarbe weiß
+        if (deck[r][0] == "#000000" || deck[r][0] == "#0000ff")
+            card.style.color = "white";
+        document.getElementById("tray").appendChild(card);
+        deck.splice(r, 1);
+        
+        let cardDeck: HTMLElement = document.createElement("div");
+        cardDeck.setAttribute("class", "card");
+        document.getElementById("pull").appendChild(cardDeck);
 
-
+    } //startCard zu
 
 } //namespace zu

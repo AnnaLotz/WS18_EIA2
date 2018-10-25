@@ -4,11 +4,13 @@ var L02;
     let deck = [];
     let color;
     let value;
+    let card;
     function main() {
         let startCards;
         startCards = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));
         createCards();
         drawCards(startCards);
+        startCard();
     } //main zu
     function createCards() {
         for (let i = 0; i < 5; i++) {
@@ -59,10 +61,10 @@ var L02;
         }
     } //createCards zu
     function drawCards(_startnum) {
-        let card;
         for (let i = _startnum; i > 0; i--) {
             let r = Math.floor(Math.random() * (deck.length - 1));
             card = document.createElement("div");
+            card.setAttribute("class", "card");
             card.innerText = deck[r][1];
             card.style.background = deck[r][0];
             //wenn farbe Schwarz oder blau: schriftfarbe weiß
@@ -72,5 +74,20 @@ var L02;
             deck.splice(r, 1);
         }
     } //drawCards zu
+    function startCard() {
+        let r = Math.floor(Math.random() * (deck.length - 1));
+        card = document.createElement("div");
+        card.setAttribute("class", "card");
+        card.innerText = deck[r][1];
+        card.style.background = deck[r][0];
+        //wenn farbe Schwarz oder blau: schriftfarbe weiß
+        if (deck[r][0] == "#000000" || deck[r][0] == "#0000ff")
+            card.style.color = "white";
+        document.getElementById("tray").appendChild(card);
+        deck.splice(r, 1);
+        let cardDeck = document.createElement("div");
+        cardDeck.setAttribute("class", "card");
+        document.getElementById("pull").appendChild(cardDeck);
+    } //startCard zu
 })(L02 || (L02 = {})); //namespace zu
 //# sourceMappingURL=index.js.map
