@@ -3,9 +3,11 @@ namespace L02 {
     document.addEventListener("DOMContentLoaded", main);
 
     let deck: string[][] = [];
+    let handCards: string[][] = [];
     let color: string;
     let value: string;
     let card: HTMLDivElement;
+
 
     function main(): void {
 
@@ -22,24 +24,24 @@ namespace L02 {
         for (let i: number = 0; i < 5; i++) {
             switch (i) {
                 case 0:
-                    color = "#ff0000"; //red
+                    color = "red"; //red
                     break;
                 case 1:
-                    color = "#00ff00"; //green
+                    color = "green"; //green
                     break;
                 case 2:
-                    color = "#0000ff"; //blue
+                    color = "blue"; //blue
                     break;
                 case 3:
-                    color = "#ffff00"; //yellow
+                    color = "yellow"; //yellow
                     break;
                 case 4:
-                    color = "#000000"; //black
+                    color = "black"; //black
                     break;
             }
 
             //black cards:
-            if (color == "#000000") {
+            if (color == "black") {
                 for (let k: number = 0; k < 4; k++) {
                     value = "+4";
                     deck.push([color, value]);
@@ -68,41 +70,42 @@ namespace L02 {
         }
     } //createCards zu
 
-    function drawCards(_startnum: number): void {
+    function drawCards(_cardNum: number): void {
 
-
-        for (let i: number = _startnum; i > 0; i--) {
+        for (let i: number = _cardNum; i > 0; i--) {
             let r: number = Math.floor(Math.random() * (deck.length - 1));
             card = document.createElement("div");
-            card.setAttribute("class", "card");
             card.innerText = deck[r][1];
-            card.style.background = deck[r][0];
-            //wenn farbe Schwarz oder blau: schriftfarbe weiß
-            if (deck[r][0] == "#000000" || deck[r][0] == "#0000ff")
-                card.style.color = "white";
+            card.setAttribute("class", "card");
+            let cardColor: string = deck[r][0];
+            card.classList.add(cardColor);
 
             document.getElementById("player").appendChild(card);
-
+            handCards.push(deck[r]);
             deck.splice(r, 1);
         }
 
+        console.log(handCards);
+
     } //drawCards zu
-    
+
     function startCard(): void {
 
+        //Ablagestapel
         let r: number = Math.floor(Math.random() * (deck.length - 1));
         card = document.createElement("div");
         card.setAttribute("class", "card");
         card.innerText = deck[r][1];
-        card.style.background = deck[r][0];
-        //wenn farbe Schwarz oder blau: schriftfarbe weiß
-        if (deck[r][0] == "#000000" || deck[r][0] == "#0000ff")
-            card.style.color = "white";
+        card.setAttribute("class", "card");
+        let cardColor: string = deck[r][0];
+        card.classList.add(cardColor);
         document.getElementById("tray").appendChild(card);
         deck.splice(r, 1);
-        
+
+        //Ziehstapel
         let cardDeck: HTMLElement = document.createElement("div");
         cardDeck.setAttribute("class", "card");
+        cardDeck.innerText = "UNO";
         document.getElementById("pull").appendChild(cardDeck);
 
     } //startCard zu

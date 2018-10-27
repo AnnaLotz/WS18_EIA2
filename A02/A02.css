@@ -2,7 +2,7 @@
 	width: 49.5%;
 	height: 50%;
 	float: left;
-	background-color: lightgrey;
+	background-color: #e6e6e6;
 	border: 0.01em solid black;
 	padding: 0.1em;
 }
@@ -14,13 +14,34 @@
 }
 
 .card {
-	background: grey;
 	width: 6em;
 	height: 9em;
 	margin: 1em;
 	float: left;
 	border: 0.01em solid black;
 	text-align: center;
-	padding: 0em;
-	
+	padding: 0em;	
+	background-color: white;
+}
+
+.black {
+	background-color: #0F0F0F;
+	color: white;
+}
+
+.red {
+	background-color: #F0110E;	
+}
+
+.green {
+	background-color: #2EC700;
+}
+
+.blue {
+	background-color: #113A8F;
+	color: white;
+}
+
+.yellow {
+	background-color: #F5F115;	
 }
