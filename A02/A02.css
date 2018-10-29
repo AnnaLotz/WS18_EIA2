@@ -3,8 +3,6 @@
 	height: 50%;
 	float: left;
 	background-color: #e6e6e6;
-	border: 0.01em solid black;
-	padding: 0.1em;
 }
 
 #player {
@@ -15,14 +13,19 @@
 
 .card {
 	width: 6em;
-	height: 9em;
+	height: 5.5em;
 	margin: 1em;
 	float: left;
-	border: 0.01em solid black;
+	padding-top: 3.5em;
+	border: 0.05em solid black;
+	border-radius: 1em;
 	text-align: center;
-	padding: 0em;	
 	background-color: white;
+	font-weight: bold;
 }
+
+
+
 
 .black {
 	background-color: #0F0F0F;
@@ -30,7 +33,7 @@
 }
 
 .red {
-	background-color: #F0110E;	
+	background-color: #F0110E;
 }
 
 .green {
@@ -43,5 +46,5 @@
 }
 
 .yellow {
-	background-color: #F5F115;	
+	background-color: #F5F115;
 }
