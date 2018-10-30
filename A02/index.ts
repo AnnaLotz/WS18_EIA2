@@ -2,77 +2,35 @@ namespace L02 {
 
     document.addEventListener("DOMContentLoaded", main);
 
-    let deck: string[][] = [];
+    export let deck: string[][] = []; //deck[index][color, value]
     let handCards: string[][] = [];
-    let color: string;
-    let value: string;
+    let playedCards: string[][] = [];
+    export let color: string;
+    export let value: string;
     let card: HTMLDivElement;
 
 
     function main(): void {
 
         let startCards: number;
-        startCards = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));
+        let i: number = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));       
+        if (i >= 1 && i < 108) {
+            startCards = i;
+        } else {
+            startCards = 5;
+        }
 
-        createCards();
+        createCards(); // -> createCards.ts
         drawCards(startCards);
         startCard();
 
     } //main zu
 
-    function createCards(): void {
-        for (let i: number = 0; i < 5; i++) {
-            switch (i) {
-                case 0:
-                    color = "red"; //red
-                    break;
-                case 1:
-                    color = "green"; //green
-                    break;
-                case 2:
-                    color = "blue"; //blue
-                    break;
-                case 3:
-                    color = "yellow"; //yellow
-                    break;
-                case 4:
-                    color = "black"; //black
-                    break;
-            }
+    
 
-            //black cards:
-            if (color == "black") {
-                for (let k: number = 0; k < 4; k++) {
-                    value = "+4";
-                    deck.push([color, value]);
-                    value = "choose Color";
-                    deck.push([color, value]);
-                }
-                //colored cards:
-            } else {
-                for (let j: number = 0; j < 10; j++) {
-                    value = j.toString();
-                    deck.push([color, value]);
-                }
-                for (let j: number = 1; j < 10; j++) {
-                    value = j.toString();
-                    deck.push([color, value]);
-                }
-                for (let j: number = 0; j < 2; j++) {
-                    value = "+2";
-                    deck.push([color, value]);
-                    value = "skip";
-                    deck.push([color, value]);
-                    value = "reverse";
-                    deck.push([color, value]);
-                }
-            }
-        }
-    } //createCards zu
+    function drawCards(_cardAmount: number): void {
 
-    function drawCards(_cardNum: number): void {
-
-        for (let i: number = _cardNum; i > 0; i--) {
+        for (let i: number = _cardAmount; i > 0; i--) {
             let r: number = Math.floor(Math.random() * (deck.length - 1));
             card = document.createElement("div");
             card.innerText = deck[r][1];
@@ -100,6 +58,7 @@ namespace L02 {
         let cardColor: string = deck[r][0];
         card.classList.add(cardColor);
         document.getElementById("tray").appendChild(card);
+        playedCards.push(deck[r]);
         deck.splice(r, 1);
 
         //Ziehstapel
@@ -107,6 +66,7 @@ namespace L02 {
         cardDeck.setAttribute("class", "card");
         cardDeck.innerText = "UNO";
         document.getElementById("pull").appendChild(cardDeck);
+        
 
     } //startCard zu
 
