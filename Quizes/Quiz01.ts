@@ -1,4 +1,28 @@
-/* =====L01===== */
+/* ====L02 ==== */
+
+console.log(Math.floor(6.85));
+
+let picture: HTMLElement = document.createElement("div");
+picture.innerText = "Hier könnte ihre Werbung stehen!";
+picture.setAttribute("class", "a");
+picture.setAttribute("class", "b");
+picture.classList.add("c");
+
+
+console.log( picture.classList);
+
+
+
+
+let anArray: string[] = ["a", "b", "c", "d", "e", "f", "g"];
+
+anArray.splice(2, 3);
+
+console.log(anArray);
+
+
+
+/* =====L01===== 
 
 let bewertung: string = "B";
 

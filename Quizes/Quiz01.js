@@ -1,5 +1,18 @@
-/* =====L01===== */
-let bewertung = "B";
+/* ====L02 ==== */
+console.log(Math.floor(6.85));
+let picture = document.createElement("div");
+picture.innerText = "Hier könnte ihre Werbung stehen!";
+picture.setAttribute("class", "a");
+picture.setAttribute("class", "b");
+picture.classList.add("c");
+console.log(picture.classList);
+let anArray = ["a", "b", "c", "d", "e", "f", "g"];
+anArray.splice(2, 3);
+console.log(anArray);
+/* =====L01=====
+
+let bewertung: string = "B";
+
 switch (bewertung) {
     case "A":
         console.log("Sehr gut");
@@ -17,9 +30,14 @@ switch (bewertung) {
         console.log("Nicht Bestanden");
         break;
 }
-let a = 20;
-let b;
+
+
+let a: number = 20;
+let b: number;
+
 b = a % 15;
+
+
 /* =====L00=====
 document.addEventListener("DOMContentLoaded", whatsTheWeatherLike);
 
