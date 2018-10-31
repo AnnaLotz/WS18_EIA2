@@ -33,7 +33,7 @@ namespace L03 {
         let r: number = Math.floor(Math.random() * (deck.length - 1));
         card = document.createElement("div");
         card.innerText = deck[r][1];
-        card.setAttribute("id", "trayCard");    
+        card.setAttribute("id", "trayCard");
         let cardColor: string = deck[r][0];
         card.classList.add("card", cardColor);
         document.getElementById("tray").appendChild(card);
@@ -63,7 +63,7 @@ namespace L03 {
             let r: number = Math.floor(Math.random() * (deck.length - 1));
             card = document.createElement("div");
             card.setAttribute("class", "card");
-            card.innerText = deck[r][1];           
+            card.innerText = deck[r][1];
             let cardColor: string = deck[r][0];
             card.classList.add(cardColor);
             document.getElementById("player").appendChild(card);
@@ -80,11 +80,11 @@ namespace L03 {
         console.log("Karte ablegen");
         let chosenCard: HTMLElement = <HTMLElement>_event.target;
         let index: number = Array.from(document.getElementById("player").children).indexOf(chosenCard);
-        let trayCard: HTMLElement = document.getElementById("trayCard");
-        trayCard.innerText = handCards[index][1];
-        trayCard.setAttribute("class", "card");
+        card = <HTMLDivElement>document.getElementById("trayCard");
+        card.innerText = handCards[index][1];
         let cardColor: string = handCards[index][0];
-        trayCard.classList.add(cardColor);
+        card.setAttribute("class", "card");
+        card.classList.add(cardColor);
         document.getElementById("player").removeChild(chosenCard);
         playedCards.push(handCards[index]);
         console.log(playedCards);
