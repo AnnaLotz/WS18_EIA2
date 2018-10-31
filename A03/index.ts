@@ -8,6 +8,7 @@ namespace L03 {
     export let color: string;
     export let value: string;
     let card: HTMLDivElement;
+    let chosenColor: string;
 
 
     function main(): void {
@@ -31,22 +32,29 @@ namespace L03 {
 
         //Ablagestapel
         let r: number = Math.floor(Math.random() * (deck.length - 1));
-        card = document.createElement("div");
-        card.innerText = deck[r][1];
-        card.setAttribute("id", "trayCard");
-        let cardColor: string = deck[r][0];
-        card.classList.add("card", cardColor);
-        document.getElementById("tray").appendChild(card);
-        playedCards.push(deck[r]);
-        deck.splice(r, 1);
+        
+        //damit keine schwarze karte als erstes liegt
+        if (deck[r][0] == "black") {
+            startCard();
+            console.log("neue startKarte");
+        } else {
+            card = document.createElement("div");
+            card.innerText = deck[r][1];
+            card.setAttribute("id", "trayCard");
+            let cardColor: string = deck[r][0];
+            card.classList.add("card", cardColor);
+            document.getElementById("tray").appendChild(card);
+            playedCards.push(deck[r]);
+            deck.splice(r, 1);
 
-        //Ziehstapel
-        let cardDeck: HTMLElement = document.createElement("div");
-        cardDeck.setAttribute("class", "card");
-        cardDeck.innerText = "UNO";
-        document.getElementById("pull").appendChild(cardDeck);
+            //Ziehstapel
+            let cardDeck: HTMLElement = document.createElement("div");
+            cardDeck.setAttribute("class", "card");
+            cardDeck.innerText = "UNO";
+            document.getElementById("pull").appendChild(cardDeck);
 
-        cardDeck.addEventListener("click", takeCard);
+            cardDeck.addEventListener("click", takeCard);
+        }
 
     } //startCard zu
 
@@ -77,20 +85,59 @@ namespace L03 {
 
 
     function putCardDown(_event: MouseEvent): void {
-        console.log("Karte ablegen");
-        let chosenCard: HTMLElement = <HTMLElement>_event.target;
-        let index: number = Array.from(document.getElementById("player").children).indexOf(chosenCard);
-        card = <HTMLDivElement>document.getElementById("trayCard");
-        card.innerText = handCards[index][1];
-        let cardColor: string = handCards[index][0];
-        card.setAttribute("class", "card");
-        card.classList.add(cardColor);
-        document.getElementById("player").removeChild(chosenCard);
-        playedCards.push(handCards[index]);
-        console.log(playedCards);
-        handCards.splice(index, 1);
 
-        //abfrage ob übereinstimmt mit letzem element aus playedCards[], dann legen
+        let chosenCard: HTMLElement = <HTMLElement>_event.target; //gedrückte spielerkarte
+        let indexPlayer: number = Array.from(document.getElementById("player").children).indexOf(chosenCard); //index der gewählten spielerkarte
+        let indexTray: number = playedCards.length - 1; //index der obersten karte
+
+        //wenn schwarze oben liegt, ist gleich mit gewünschter Farbe?
+        if (playedCards[indexTray][0] == "black") {
+            if (handCards[indexPlayer][0] == chosenColor) {
+                card = <HTMLDivElement>document.getElementById("trayCard");
+                card.innerText = handCards[indexPlayer][1];
+                let cardColor: string = handCards[indexPlayer][0];
+                card.setAttribute("class", "card");
+                card.classList.add(cardColor);
+                card.style.border = " 0.05em solid black";
+                document.getElementById("player").removeChild(chosenCard);
+                playedCards.push(handCards[indexPlayer]);
+                handCards.splice(indexPlayer, 1);
+            }
+
+        } else {
+
+            //wenn spieler schwarz legt, farbwahl mit promt
+            if (handCards[indexPlayer][0] == "black") {
+                chosenColor = prompt("Welche Farbe wünschst du dir? ('red', 'green', 'blue' oder 'yellow')");
+                card = <HTMLDivElement>document.getElementById("trayCard");
+                card.innerText = handCards[indexPlayer][1];
+                card.setAttribute("class", "card");
+                card.classList.add("black");
+                let style: string = "0.5em solid " + chosenColor;
+                card.style.border = style;
+                document.getElementById("player").removeChild(chosenCard);
+                playedCards.push(handCards[indexPlayer]);
+                handCards.splice(indexPlayer, 1);
+
+                //sonst prüfe, ob farben oder wert identisch    
+            } else if (handCards[indexPlayer][0] == playedCards[indexTray][0] || handCards[indexPlayer][1] == playedCards[indexTray][1]) {
+                card = <HTMLDivElement>document.getElementById("trayCard");
+                card.innerText = handCards[indexPlayer][1];
+                let cardColor: string = handCards[indexPlayer][0];
+                card.setAttribute("class", "card");
+                card.classList.add(cardColor);
+                card.style.border = " 0.05em solid black";
+                document.getElementById("player").removeChild(chosenCard);
+                playedCards.push(handCards[indexPlayer]);
+                handCards.splice(indexPlayer, 1);
+
+            }
+        }
+
+
+
+
+
 
     } //putCardDown zu
 
