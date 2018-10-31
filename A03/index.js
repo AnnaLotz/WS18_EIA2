@@ -18,16 +18,15 @@ var L03;
         drawCards(startCards);
         startCard();
     } //main zu
-    //Startkarte aufdecken + zeihstapel darstellen
+    //Startkarte aufdecken + ziehstapel darstellen
     function startCard() {
         //Ablagestapel
         let r = Math.floor(Math.random() * (L03.deck.length - 1));
         card = document.createElement("div");
-        card.setAttribute("class", "card");
-        card.setAttribute("id", "trayCard");
         card.innerText = L03.deck[r][1];
+        card.setAttribute("id", "trayCard");
         let cardColor = L03.deck[r][0];
-        card.classList.add(cardColor);
+        card.classList.add("card", cardColor);
         document.getElementById("tray").appendChild(card);
         playedCards.push(L03.deck[r]);
         L03.deck.splice(r, 1);
@@ -46,8 +45,8 @@ var L03;
         for (let i = 0; i < _cardAmount; i++) {
             let r = Math.floor(Math.random() * (L03.deck.length - 1));
             card = document.createElement("div");
-            card.innerText = L03.deck[r][1];
             card.setAttribute("class", "card");
+            card.innerText = L03.deck[r][1];
             let cardColor = L03.deck[r][0];
             card.classList.add(cardColor);
             document.getElementById("player").appendChild(card);
@@ -57,13 +56,14 @@ var L03;
         }
     } //drawCards zu
     function putCardDown(_event) {
-        console.log("removeCard");
+        console.log("Karte ablegen");
         let chosenCard = _event.target;
         let index = Array.from(document.getElementById("player").children).indexOf(chosenCard);
-        card.innerText = handCards[index][1];
-        card.setAttribute("class", "card");
+        let trayCard = document.getElementById("trayCard");
+        trayCard.innerText = handCards[index][1];
+        trayCard.setAttribute("class", "card");
         let cardColor = handCards[index][0];
-        card.classList.add(cardColor);
+        trayCard.classList.add(cardColor);
         document.getElementById("player").removeChild(chosenCard);
         playedCards.push(handCards[index]);
         console.log(playedCards);

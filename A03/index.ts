@@ -26,17 +26,16 @@ namespace L03 {
 
     } //main zu
 
-    //Startkarte aufdecken + zeihstapel darstellen
+    //Startkarte aufdecken + ziehstapel darstellen
     function startCard(): void {
 
         //Ablagestapel
         let r: number = Math.floor(Math.random() * (deck.length - 1));
         card = document.createElement("div");
-        card.setAttribute("class", "card");
-        card.setAttribute("id", "trayCard");
         card.innerText = deck[r][1];
+        card.setAttribute("id", "trayCard");    
         let cardColor: string = deck[r][0];
-        card.classList.add(cardColor);
+        card.classList.add("card", cardColor);
         document.getElementById("tray").appendChild(card);
         playedCards.push(deck[r]);
         deck.splice(r, 1);
@@ -63,8 +62,8 @@ namespace L03 {
         for (let i: number = 0; i < _cardAmount; i++) {
             let r: number = Math.floor(Math.random() * (deck.length - 1));
             card = document.createElement("div");
-            card.innerText = deck[r][1];
             card.setAttribute("class", "card");
+            card.innerText = deck[r][1];           
             let cardColor: string = deck[r][0];
             card.classList.add(cardColor);
             document.getElementById("player").appendChild(card);
@@ -78,14 +77,14 @@ namespace L03 {
 
 
     function putCardDown(_event: MouseEvent): void {
-        console.log("removeCard");
+        console.log("Karte ablegen");
         let chosenCard: HTMLElement = <HTMLElement>_event.target;
         let index: number = Array.from(document.getElementById("player").children).indexOf(chosenCard);
-        card.innerText = handCards[index][1];
-        card.setAttribute("class", "card");
+        let trayCard: HTMLElement = document.getElementById("trayCard");
+        trayCard.innerText = handCards[index][1];
+        trayCard.setAttribute("class", "card");
         let cardColor: string = handCards[index][0];
-        card.classList.add(cardColor);       
-
+        trayCard.classList.add(cardColor);
         document.getElementById("player").removeChild(chosenCard);
         playedCards.push(handCards[index]);
         console.log(playedCards);
