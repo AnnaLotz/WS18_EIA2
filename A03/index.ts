@@ -4,8 +4,6 @@ namespace L03 {
 
     export let deck: string[][] = []; //deck[index][color, value]
     let handCards: string[][] = [];
-    let handCardsIndex: number = 0;
-    let index: number;
     let playedCards: string[][] = [];
     export let color: string;
     export let value: string;
@@ -35,6 +33,7 @@ namespace L03 {
         let r: number = Math.floor(Math.random() * (deck.length - 1));
         card = document.createElement("div");
         card.setAttribute("class", "card");
+        card.setAttribute("id", "trayCard");
         card.innerText = deck[r][1];
         let cardColor: string = deck[r][0];
         card.classList.add(cardColor);
@@ -81,17 +80,16 @@ namespace L03 {
     function putCardDown(_event: MouseEvent): void {
         console.log("removeCard");
         let chosenCard: HTMLElement = <HTMLElement>_event.target;
-
-        index = Array.from(document.getElementById("player").children).indexOf(chosenCard);
+        let index: number = Array.from(document.getElementById("player").children).indexOf(chosenCard);
         card.innerText = handCards[index][1];
         card.setAttribute("class", "card");
         let cardColor: string = handCards[index][0];
-        card.classList.add(cardColor);
-        document.getElementById("tray").appendChild(card);
-        playedCards.push(handCards[index]);
-        handCards.splice(index, 1);
-        console.log(index);
+        card.classList.add(cardColor);       
+
         document.getElementById("player").removeChild(chosenCard);
+        playedCards.push(handCards[index]);
+        console.log(playedCards);
+        handCards.splice(index, 1);
 
         //abfrage ob übereinstimmt mit letzem element aus playedCards[], dann legen
 

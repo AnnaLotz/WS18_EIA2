@@ -3,8 +3,6 @@ var L03;
     document.addEventListener("DOMContentLoaded", main);
     L03.deck = []; //deck[index][color, value]
     let handCards = [];
-    let handCardsIndex = 0;
-    let index;
     let playedCards = [];
     let card;
     function main() {
@@ -26,6 +24,7 @@ var L03;
         let r = Math.floor(Math.random() * (L03.deck.length - 1));
         card = document.createElement("div");
         card.setAttribute("class", "card");
+        card.setAttribute("id", "trayCard");
         card.innerText = L03.deck[r][1];
         let cardColor = L03.deck[r][0];
         card.classList.add(cardColor);
@@ -60,16 +59,15 @@ var L03;
     function putCardDown(_event) {
         console.log("removeCard");
         let chosenCard = _event.target;
-        index = Array.from(document.getElementById("player").children).indexOf(chosenCard);
+        let index = Array.from(document.getElementById("player").children).indexOf(chosenCard);
         card.innerText = handCards[index][1];
         card.setAttribute("class", "card");
         let cardColor = handCards[index][0];
         card.classList.add(cardColor);
-        document.getElementById("tray").appendChild(card);
-        playedCards.push(handCards[index]);
-        handCards.splice(index, 1);
-        console.log(index);
         document.getElementById("player").removeChild(chosenCard);
+        playedCards.push(handCards[index]);
+        console.log(playedCards);
+        handCards.splice(index, 1);
         //abfrage ob übereinstimmt mit letzem element aus playedCards[], dann legen
     } //putCardDown zu
 })(L03 || (L03 = {})); //namespace zu
