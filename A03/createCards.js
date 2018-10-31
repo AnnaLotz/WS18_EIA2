@@ -49,5 +49,5 @@ var L03;
         }
     }
     L03.createCards = createCards; //createCards zu
-})(L03 || (L03 = {}));
+})(L03 || (L03 = {})); //namespace zu
 //# sourceMappingURL=createCards.js.map

@@ -4,6 +4,8 @@ namespace L03 {
 
     export let deck: string[][] = []; //deck[index][color, value]
     let handCards: string[][] = [];
+    let handCardsIndex: number = 0;
+    let index: number;
     let playedCards: string[][] = [];
     export let color: string;
     export let value: string;
@@ -13,7 +15,7 @@ namespace L03 {
     function main(): void {
 
         let startCards: number;
-        let i: number = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));       
+        let i: number = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));
         if (i >= 1 && i < 108) {
             startCards = i;
         } else {
@@ -26,27 +28,7 @@ namespace L03 {
 
     } //main zu
 
-    
-
-    function drawCards(_cardAmount: number): void {
-
-        for (let i: number = _cardAmount; i > 0; i--) {
-            let r: number = Math.floor(Math.random() * (deck.length - 1));
-            card = document.createElement("div");
-            card.innerText = deck[r][1];
-            card.setAttribute("class", "card");
-            let cardColor: string = deck[r][0];
-            card.classList.add(cardColor);
-
-            document.getElementById("player").appendChild(card);
-            handCards.push(deck[r]);
-            deck.splice(r, 1);
-        }
-
-        console.log(handCards);
-
-    } //drawCards zu
-
+    //Startkarte aufdecken + zeihstapel darstellen
     function startCard(): void {
 
         //Ablagestapel
@@ -54,7 +36,6 @@ namespace L03 {
         card = document.createElement("div");
         card.setAttribute("class", "card");
         card.innerText = deck[r][1];
-        card.setAttribute("class", "card");
         let cardColor: string = deck[r][0];
         card.classList.add(cardColor);
         document.getElementById("tray").appendChild(card);
@@ -66,8 +47,57 @@ namespace L03 {
         cardDeck.setAttribute("class", "card");
         cardDeck.innerText = "UNO";
         document.getElementById("pull").appendChild(cardDeck);
-        
+
+        cardDeck.addEventListener("click", takeCard);
 
     } //startCard zu
+
+
+
+    function takeCard(): void {
+        drawCards(1);
+    }
+
+    //Karten ziehen
+    function drawCards(_cardAmount: number): void {
+
+        for (let i: number = 0; i < _cardAmount; i++) {
+            let r: number = Math.floor(Math.random() * (deck.length - 1));
+            card = document.createElement("div");
+            card.innerText = deck[r][1];
+            card.setAttribute("class", "card");
+            let cardColor: string = deck[r][0];
+            card.classList.add(cardColor);
+            document.getElementById("player").appendChild(card);
+            handCards.push(deck[r]);
+            deck.splice(r, 1);
+
+            card.addEventListener("click", putCardDown);
+        }
+
+    } //drawCards zu
+
+
+    function putCardDown(_event: MouseEvent): void {
+        console.log("removeCard");
+        let chosenCard: HTMLElement = <HTMLElement>_event.target;
+
+        index = Array.from(document.getElementById("player").children).indexOf(chosenCard);
+        card.innerText = handCards[index][1];
+        card.setAttribute("class", "card");
+        let cardColor: string = handCards[index][0];
+        card.classList.add(cardColor);
+        document.getElementById("tray").appendChild(card);
+        playedCards.push(handCards[index]);
+        handCards.splice(index, 1);
+        console.log(index);
+        document.getElementById("player").removeChild(chosenCard);
+
+        //abfrage ob übereinstimmt mit letzem element aus playedCards[], dann legen
+
+    } //putCardDown zu
+
+
+
 
 } //namespace zu
