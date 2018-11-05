@@ -55,8 +55,7 @@ var L03;
         if (_event.keyCode == 32 || _event.target == cardDeck) {
             drawCards(1);
         }
-    }
-    //Karten ziehen
+    } //takeCard zu
     function drawCards(_cardAmount) {
         for (let i = 0; i < _cardAmount; i++) {
             let r = Math.floor(Math.random() * (L03.deck.length - 1));
