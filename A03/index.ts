@@ -21,13 +21,14 @@ namespace L03 {
         } else {
             startCards = 5;
         }
-
+        
         createCards(); // -> createCards.ts
         drawCards(startCards);
         startCard();
 
     } //main zu
 
+    
     //Startkarte aufdecken + ziehstapel darstellen
     function startCard(): void {
 
@@ -61,21 +62,17 @@ namespace L03 {
             let button: HTMLElement = document.getElementById("sort");
             button.addEventListener("click", sortCards);
         }
-
     } //startCard zu
 
-
-
-
-
+    
     function takeCard(_event: KeyboardEvent): void {
         //leertaste gedrückt oder karte geclicked
         if (_event.keyCode == 32 || _event.target == cardDeck) {
             drawCards(1);
         }
-    }
+    } //takeCard zu
 
-    //Karten ziehen
+
     function drawCards(_cardAmount: number): void {
 
         for (let i: number = 0; i < _cardAmount; i++) {
@@ -88,10 +85,8 @@ namespace L03 {
             document.getElementById("player").appendChild(card);
             handCards.push(deck[r]);
             deck.splice(r, 1);
-
             card.addEventListener("click", putCardDown);
         }
-
     } //drawCards zu
 
 
@@ -100,7 +95,6 @@ namespace L03 {
         let chosenCard: HTMLElement = <HTMLElement>_event.target; //gedrückte spielerkarte
         let indexPlayer: number = Array.from(document.getElementById("player").children).indexOf(chosenCard); //index der gewählten spielerkarte
         let indexTray: number = playedCards.length - 1; //index der obersten karte
-
 
         //wenn spieler schwarz legt, farbwahl mit promt
         if (handCards[indexPlayer][0] == "black") {
@@ -138,11 +132,8 @@ namespace L03 {
             document.getElementById("player").removeChild(chosenCard);
             playedCards.push(handCards[indexPlayer]);
             handCards.splice(indexPlayer, 1);
-
         }
-
     } //putCardDown zu
-
 
 
     function sortCards(): void {
@@ -160,8 +151,6 @@ namespace L03 {
             card.addEventListener("click", putCardDown);
         }
     } //sortCards zu
-
-
-
+    
 
 } //namespace zu
