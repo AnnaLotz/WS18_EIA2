@@ -71,7 +71,7 @@ var L03;
         }
     } //drawCards zu
     function putCardDown(_event) {
-        let chosenCard = _event.target; //gedrückte spielerkarte
+        let chosenCard = _event.target; //gedrückte spielerkarte -> HTML-Element
         let indexPlayer = Array.from(document.getElementById("player").children).indexOf(chosenCard); //index der gewählten spielerkarte
         let indexTray = playedCards.length - 1; //index der obersten karte
         //wenn spieler schwarz legt, farbwahl mit promt

@@ -92,7 +92,7 @@ namespace L03 {
 
     function putCardDown(_event: MouseEvent): void {
 
-        let chosenCard: HTMLElement = <HTMLElement>_event.target; //gedrückte spielerkarte
+        let chosenCard: HTMLElement = <HTMLElement>_event.target; //gedrückte spielerkarte -> HTML-Element
         let indexPlayer: number = Array.from(document.getElementById("player").children).indexOf(chosenCard); //index der gewählten spielerkarte
         let indexTray: number = playedCards.length - 1; //index der obersten karte
 

@@ -3,9 +3,11 @@
 
 * {
 	font-family: 'Roboto', sans-serif;
-
+	font-size: 100%;
 }
 
+
+/* Karten an sich */
 .stack {
 	width: 49.5%;
 	height: 58%;
@@ -32,27 +34,7 @@
 	font-weight: bold;
 }
 
-#sort {
-	float: left;
-	margin: 1em 0.5em 0em 0.5em;
-	padding: 0.8em;
-	border: 0.2em solid black;
-	border-radius: 50%;
-	background-color: #e6e6e6;
-	font-weight: bold;
-	box-shadow: 0 4px #999;
-}
-
-#sort:hover {
-	background-color: #e0e0e0;
-}
-
-#sort:active {
-	background-color: #e0e0e0;
-	box-shadow: 0 2px #666;
-	transform: translateY(2px);
-}
-
+/* einzelne Kartenfarben */
 .black {
 	background-color: #0F0F0F;
 	color: white;
@@ -74,3 +56,30 @@
 .yellow {
 	background-color: #F5F115;
 }
+
+
+/* sort-button */
+#sort {
+	font-size: 73%;
+	float: left;
+	margin: 1em 0.5em 0em 0.5em;
+	padding: 0.8em;
+	border: 0.2em solid black;
+	border-radius: 100%;
+	background-color: #e6e6e6;
+	font-weight: bold;
+	box-shadow: 0 4px #999;
+}
+
+#sort:hover {
+	background-color: #e0e0e0;
+}
+
+#sort:active {
+	background-color: #e0e0e0;
+	box-shadow: 0 2px #666;
+	transform: translateY(2px);
+}
+
+
+
