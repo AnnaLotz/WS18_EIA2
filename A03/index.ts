@@ -8,6 +8,7 @@ namespace L03 {
     export let color: string;
     export let value: string;
     let card: HTMLDivElement;
+    let cardDeck: HTMLElement;
     let chosenColor: string;
 
 
@@ -32,7 +33,7 @@ namespace L03 {
 
         //Ablagestapel
         let r: number = Math.floor(Math.random() * (deck.length - 1));
-        
+
         //damit keine schwarze karte als erstes liegt
         if (deck[r][0] == "black") {
             startCard();
@@ -48,20 +49,24 @@ namespace L03 {
             deck.splice(r, 1);
 
             //Ziehstapel
-            let cardDeck: HTMLElement = document.createElement("div");
+            cardDeck = document.createElement("div");
             cardDeck.setAttribute("class", "card");
             cardDeck.innerText = "UNO";
             document.getElementById("pull").appendChild(cardDeck);
 
+            //Listener
             cardDeck.addEventListener("click", takeCard);
+            document.addEventListener("keydown", takeCard);
         }
 
     } //startCard zu
 
 
-
-    function takeCard(): void {
-        drawCards(1);
+    function takeCard(_event: KeyboardEvent): void {
+        //leertaste gedrückt oder karte geclicked
+        if (_event.keyCode == 32 || _event.target == cardDeck) {
+            drawCards(1);
+        }
     }
 
     //Karten ziehen

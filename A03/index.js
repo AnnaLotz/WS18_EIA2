@@ -5,6 +5,7 @@ var L03;
     let handCards = [];
     let playedCards = [];
     let card;
+    let cardDeck;
     let chosenColor;
     function main() {
         let startCards;
@@ -38,15 +39,20 @@ var L03;
             playedCards.push(L03.deck[r]);
             L03.deck.splice(r, 1);
             //Ziehstapel
-            let cardDeck = document.createElement("div");
+            cardDeck = document.createElement("div");
             cardDeck.setAttribute("class", "card");
             cardDeck.innerText = "UNO";
             document.getElementById("pull").appendChild(cardDeck);
+            //Listener
             cardDeck.addEventListener("click", takeCard);
+            document.addEventListener("keydown", takeCard);
         }
     } //startCard zu
-    function takeCard() {
-        drawCards(1);
+    function takeCard(_event) {
+        //leertaste gedrückt oder karte geclicked
+        if (_event.keyCode == 32 || _event.target == cardDeck) {
+            drawCards(1);
+        }
     }
     //Karten ziehen
     function drawCards(_cardAmount) {
