@@ -57,9 +57,15 @@ namespace L03 {
             //Listener
             cardDeck.addEventListener("click", takeCard);
             document.addEventListener("keydown", takeCard);
+
+            let button: HTMLElement = document.getElementById("sort");
+            button.addEventListener("click", sortCards);
         }
 
     } //startCard zu
+
+
+
 
 
     function takeCard(_event: KeyboardEvent): void {
@@ -95,8 +101,21 @@ namespace L03 {
         let indexPlayer: number = Array.from(document.getElementById("player").children).indexOf(chosenCard); //index der gewählten spielerkarte
         let indexTray: number = playedCards.length - 1; //index der obersten karte
 
-        //wenn schwarze oben liegt, ist gleich mit gewünschter Farbe?
-        if (playedCards[indexTray][0] == "black") {
+
+        //wenn spieler schwarz legt, farbwahl mit promt
+        if (handCards[indexPlayer][0] == "black") {
+            chosenColor = prompt("Welche Farbe wünschst du dir? ('red', 'green', 'blue' oder 'yellow')");
+            card = <HTMLDivElement>document.getElementById("trayCard");
+            card.innerText = handCards[indexPlayer][1];
+            card.setAttribute("class", "card");
+            card.classList.add("black");
+            let style: string = "0.5em solid " + chosenColor;
+            card.style.border = style;
+            document.getElementById("player").removeChild(chosenCard);
+            playedCards.push(handCards[indexPlayer]);
+            handCards.splice(indexPlayer, 1);
+            //wenn schwarze oben liegt, ist gleich mit gewünschter Farbe?
+        } else if (playedCards[indexTray][0] == "black") {
             if (handCards[indexPlayer][0] == chosenColor) {
                 card = <HTMLDivElement>document.getElementById("trayCard");
                 card.innerText = handCards[indexPlayer][1];
@@ -108,43 +127,39 @@ namespace L03 {
                 playedCards.push(handCards[indexPlayer]);
                 handCards.splice(indexPlayer, 1);
             }
+            //sonst prüfe, ob farben oder wert identisch    
+        } else if (handCards[indexPlayer][0] == playedCards[indexTray][0] || handCards[indexPlayer][1] == playedCards[indexTray][1]) {
+            card = <HTMLDivElement>document.getElementById("trayCard");
+            card.innerText = handCards[indexPlayer][1];
+            let cardColor: string = handCards[indexPlayer][0];
+            card.setAttribute("class", "card");
+            card.classList.add(cardColor);
+            card.style.border = " 0.05em solid black";
+            document.getElementById("player").removeChild(chosenCard);
+            playedCards.push(handCards[indexPlayer]);
+            handCards.splice(indexPlayer, 1);
 
-        } else {
-
-            //wenn spieler schwarz legt, farbwahl mit promt
-            if (handCards[indexPlayer][0] == "black") {
-                chosenColor = prompt("Welche Farbe wünschst du dir? ('red', 'green', 'blue' oder 'yellow')");
-                card = <HTMLDivElement>document.getElementById("trayCard");
-                card.innerText = handCards[indexPlayer][1];
-                card.setAttribute("class", "card");
-                card.classList.add("black");
-                let style: string = "0.5em solid " + chosenColor;
-                card.style.border = style;
-                document.getElementById("player").removeChild(chosenCard);
-                playedCards.push(handCards[indexPlayer]);
-                handCards.splice(indexPlayer, 1);
-
-                //sonst prüfe, ob farben oder wert identisch    
-            } else if (handCards[indexPlayer][0] == playedCards[indexTray][0] || handCards[indexPlayer][1] == playedCards[indexTray][1]) {
-                card = <HTMLDivElement>document.getElementById("trayCard");
-                card.innerText = handCards[indexPlayer][1];
-                let cardColor: string = handCards[indexPlayer][0];
-                card.setAttribute("class", "card");
-                card.classList.add(cardColor);
-                card.style.border = " 0.05em solid black";
-                document.getElementById("player").removeChild(chosenCard);
-                playedCards.push(handCards[indexPlayer]);
-                handCards.splice(indexPlayer, 1);
-
-            }
         }
 
-
-
-
-
-
     } //putCardDown zu
+
+
+
+    function sortCards(): void {
+        handCards.sort();
+        console.log(handCards);
+        document.getElementById("player").innerHTML = "";
+
+        for (let i: number = 0; i < handCards.length; i++) {
+            card = document.createElement("div");
+            card.setAttribute("class", "card");
+            card.innerText = handCards[i][1];
+            let cardColor: string = handCards[i][0];
+            card.classList.add(cardColor);
+            document.getElementById("player").appendChild(card);
+            card.addEventListener("click", putCardDown);
+        }
+    } //sortCards zu
 
 
 
