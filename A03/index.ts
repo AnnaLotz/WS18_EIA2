@@ -21,14 +21,14 @@ namespace L03 {
         } else {
             startCards = 5;
         }
-        
+
         createCards(); // -> createCards.ts
         drawCards(startCards);
         startCard();
 
     } //main zu
 
-    
+
     //Startkarte aufdecken + ziehstapel darstellen
     function startCard(): void {
 
@@ -64,7 +64,7 @@ namespace L03 {
         }
     } //startCard zu
 
-    
+
     function takeCard(_event: KeyboardEvent): void {
         //leertaste gedrückt oder karte geclicked
         if (_event.keyCode == 32 || _event.target == cardDeck) {
@@ -151,6 +151,9 @@ namespace L03 {
             card.addEventListener("click", putCardDown);
         }
     } //sortCards zu
+
+    /* Code von Anna Lotz:
+       https://github.com/AnnaLotz?tab=repositories */
     
 
 } //namespace zu

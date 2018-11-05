@@ -50,4 +50,7 @@ namespace L03 {
         }
     } //createCards zu
 
+    /* Code von Anna Lotz:
+       https://github.com/AnnaLotz?tab=repositories */
+
 } //namespace zu

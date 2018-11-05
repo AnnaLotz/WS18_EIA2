@@ -13,7 +13,7 @@ namespace L02 {
     function main(): void {
 
         let startCards: number;
-        let i: number = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));       
+        let i: number = parseInt(prompt("Mit wie vielen Karten möchtest du starten?", "5"));
         if (i >= 1 && i < 108) {
             startCards = i;
         } else {
@@ -26,7 +26,7 @@ namespace L02 {
 
     } //main zu
 
-    
+
 
     function drawCards(_cardAmount: number): void {
 
@@ -66,8 +66,11 @@ namespace L02 {
         cardDeck.setAttribute("class", "card");
         cardDeck.innerText = "UNO";
         document.getElementById("pull").appendChild(cardDeck);
-        
+
 
     } //startCard zu
+
+    /* Code von Anna Lotz:
+       https://github.com/AnnaLotz?tab=repositories */
 
 } //namespace zu
