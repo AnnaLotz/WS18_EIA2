@@ -1,14 +1,39 @@
-/* ====L02 ==== */
+document.addEventListener("DOMContentLoaded", fnk);
+function fnk() {
+    document.getElementsByTagName("body")[0].addEventListener("keyup", up);
+    document.getElementsByTagName("body")[0].addEventListener("keydown", down);
+}
+function up(_event) {
+    document.getElementsByTagName("body")[0].innerHTML = "Hallo";
+}
+function down() {
+    document.getElementsByTagName("body")[0].innerHTML = "Guten Tag";
+}
+/* ====L02 ====
+
 console.log(Math.floor(6.85));
-let picture = document.createElement("div");
+
+let picture: HTMLElement = document.createElement("div");
 picture.innerText = "Hier könnte ihre Werbung stehen!";
 picture.setAttribute("class", "a");
 picture.setAttribute("class", "b");
 picture.classList.add("c");
+
+
 console.log(picture.classList);
-let anArray = ["a", "b", "c", "d", "e", "f", "g"];
+
+
+
+
+let anArray: string[] = ["a", "b", "c", "d", "e", "f", "g"];
+
 anArray.splice(2, 3);
+
 console.log(anArray);
+
+
+
+
 /* =====L01=====
 
 let bewertung: string = "B";
@@ -59,5 +84,6 @@ function whatsTheWeatherLike(): void {
 }
 
     let a: string = "12";
-*/ 
+*/
+//namespace zu 
 //# sourceMappingURL=Quiz01.js.map
