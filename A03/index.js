@@ -27,7 +27,6 @@ var L03;
         //damit keine schwarze karte als erstes liegt
         if (L03.deck[r][0] == "black") {
             startCard();
-            console.log("neue startKarte");
         }
         else {
             card = document.createElement("div");

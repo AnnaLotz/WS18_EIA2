@@ -28,13 +28,12 @@ namespace L03 {
 
     //Startkarte aufdecken + ziehstapel darstellen
     function startCard(): void {
+        
         //Ablagestapel
         let r: number = Math.floor(Math.random() * (deck.length - 1));
-
         //damit keine schwarze karte als erstes liegt
         if (deck[r][0] == "black") {
             startCard();
-            console.log("neue startKarte");
         } else {
             card = document.createElement("div");
             card.innerText = deck[r][1];
