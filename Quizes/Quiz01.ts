@@ -1,3 +1,30 @@
+/* ====L05====
+
+
+//So ist es richtig:
+namespace MyProgramm {
+    let a: string = "This is some Text.";
+    writeText(a);
+    
+    function writeText(_übergabe: string): void {
+        document.getElementsByTagName("body")[0].innerText = _übergabe;
+    }    
+}
+
+
+//Abgefragt/Falsch:
+namespace MyProgramm {
+    let A: string = "This is some Text."; //A nicht große schreiben, auch nicht in nächster Zeile; am besten einen bezeichnenderen Namen wählen
+    Writetext(A); //Funtkionsnamen klein beginnen, weitere Wörter darin groß beginnen - auch beim funktion deklarieren
+    
+    function Writetext(übergabe: string): void { //ÜbergabeParameter mit Unterstrich beginnen, in nächster Zeile also auch; am bestenübergabe englisch
+        document.getElementsByTagName("body")[0].innerText = übergabe;
+    }    
+}
+
+
+/* ====L04==== 
+
 document.addEventListener("DOMContentLoaded", fnk);
 
 function fnk(): void {
@@ -17,7 +44,7 @@ function down(): void {
 
 
 
-    /* ====L02 ==== 
+    /* ====L03==== 
     
     console.log(Math.floor(6.85));
     
@@ -42,7 +69,7 @@ function down(): void {
     
     
     
-    /* =====L01===== 
+    /* =====L02===== 
     
     let bewertung: string = "B";
     
@@ -71,7 +98,7 @@ function down(): void {
     b = a % 15;
     
     
-    /* =====L00=====
+    /* =====L01=====
     document.addEventListener("DOMContentLoaded", whatsTheWeatherLike);
     
     let season: string[] = ["spring", "summer", "autumn", "winter"];
@@ -93,4 +120,4 @@ function down(): void {
     
         let a: string = "12";
     */
- //namespace zu
+// }//namespace zu
