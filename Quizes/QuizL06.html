@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<form id="field1">
+		First Name: <input type="text" name="firstName" value="Max"><br>
+		Last Name: <input type="text" name="lastName" value="Mustermann"><br>
+	</form>
+	Adress:
+	<input type="text" name="adress" value="Timbuktu">
+	<br> Number:
+	<input type="text" name="number" value="	">
+	<br>
+	
+	<fieldset id="output"></fieldset>
+	
+	<button onclick="eiaQuiz()">Check</button>
+
+	<script>
+	document.getElementsByTagName("button")[0].addEventListener("click", eiaQuiz);
+		function eiaQuiz(): void {
+			let x: HTMLElement = document.getElementById("field1");
+			let txt: string = "";
+			for (let i = 0; i < x.length; i++) {
+				txt += x.elements[i].value + "<br>";				
+			}
+			document.getElementById("output").innerHtml= txt;			
+		}
+	</script>
+
+</body>
+</html>
