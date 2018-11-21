@@ -55,7 +55,6 @@ namespace A4 {
                 fieldset.appendChild(label);
                 div = document.getElementById("products");
                 div.appendChild(fieldset);
-
                 //input typ definieren
                 if (key == "trees" || key == "stands") {
                     input.type = "radio";
@@ -66,15 +65,12 @@ namespace A4 {
                 fieldset.appendChild(document.createElement("br"));
             } //schleife einzelnes Produkt ende
         } //schleife produktgruppe ende
-
     } //close createInputs
 
     function handleChange(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
-
-        console.log("Changed " + target.name + " to " + target.value);
-        if (this.id == "ornaments") {
-            console.log("Changed " + target.name + " to " + target.checked);
+        if (this.id != "trees" || this.id != "stands") {    
+            console.log("Changed " + target.name +  " " + target.value + " to " + target.checked);
             if (target.type == "checkbox") {
                 if (target.checked == true)
                     addStepper(target);
@@ -86,8 +82,8 @@ namespace A4 {
     } //close handleChange
 
     function addStepper(_target: HTMLInputElement): void {
-        input = document.createElement("input");
-
+        input = document.createElement("input");        
+        
         input.type = "number";
         input.name = "stepper";
         input.step = "1";
@@ -95,11 +91,11 @@ namespace A4 {
         input.max = "30";
         input.value = "1";
         input.id = _target.name + "stepper";
-        _target.parentElement.appendChild(input);
+        document.getElementById(_target.id).nextSibling.appendChild(input);
     } //close addStepper
 
     function removeStepper(_target: HTMLInputElement): void {
-        _target.parentElement.removeChild(input);
+        document.getElementById(_target.id).nextSibling.removeChild(input);
     } //close removeStepper
 
 } //close Namespace
