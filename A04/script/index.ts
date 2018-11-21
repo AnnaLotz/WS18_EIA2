@@ -2,6 +2,8 @@ namespace A4 {
 
     document.addEventListener("DOMContentLoaded", init);
 
+    let fieldset: HTMLElement;
+    let legend: HTMLElement;
     let input: HTMLInputElement;
     let label: HTMLLabelElement;
 
@@ -18,6 +20,55 @@ namespace A4 {
     } //close init
 
 
+    function createInputs(): void {
+        let div: Node;
+        let groupAmount: number;
+        let productsInGroupAmount: number;
+
+        //Schleife für die Produktgruppe
+        for (let key in products) {
+
+            let product: Product[] = products[key]; //das einzelne Produkt als Interface
+            groupAmount = key.length; //menge der Produktgruppen, also Bäume, Kugeln...
+            productsInGroupAmount = product.length; //Menge der Produkte in einer Gruppe, also Tanne, Fichte...
+            console.log(key);
+
+            fieldset = document.createElement("fieldset");
+            legend = document.createElement("legend");
+            legend.innerText = key;
+            fieldset.appendChild(legend);
+
+            //Schleife für jedes einzelne Produkt
+            for (let i: number = 0; i < productsInGroupAmount; i++) {
+
+                //Allgemeinen Input definieren
+                input = document.createElement("input");
+                input.name = key;
+                input.value = products[key][i].name;
+                input.id = products[key][i].name;
+                //Label (Beschriftung)
+                label = document.createElement("label");
+                label.setAttribute("for", products[key][i].name);
+                label.innerText = products[key][i].name + " (" + products[key][i].price + "€)";
+                //Ins HTML anhängen
+                fieldset.appendChild(input);
+                fieldset.appendChild(label);
+                div = document.getElementById("products");
+                div.appendChild(fieldset);
+
+                //input typ definieren
+                if (key == "trees" || key == "stands") {
+                    input.type = "radio";
+                } else {
+                    input.type = "checkbox";
+                }
+
+                fieldset.appendChild(document.createElement("br"));
+            } //schleife einzelnes Produkt ende
+        } //schleife produktgruppe ende
+
+    } //close createInputs
+
     function handleChange(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
 
@@ -33,7 +84,6 @@ namespace A4 {
             }
         }
     } //close handleChange
-
 
     function addStepper(_target: HTMLInputElement): void {
         input = document.createElement("input");
@@ -52,49 +102,4 @@ namespace A4 {
         _target.parentElement.removeChild(input);
     } //close removeStepper
 
-
-    function createInputs(): void {
-        let fieldset: Node;
-
-        //Trees
-        for (let i: number = 0; i < trees.length; i++) {
-            input = document.createElement("input");
-            input.type = "radio";
-            input.name = "TreeGroup";
-            input.value = trees[i].name;
-            input.id = trees[i].name;
-
-            label = document.createElement("label");
-            label.setAttribute("for", trees[i].name);
-            label.innerText = trees[i].name + " (" + trees[i].price + "€)";
-
-            fieldset = document.getElementById("trees");
-            fieldset.appendChild(input);
-            fieldset.appendChild(label);
-            fieldset.appendChild(document.createElement("br"));
-        }
-
-        //Ornaments
-        for (let i: number = 0; i < ornaments.length; i++) {
-
-            input = document.createElement("input");
-            input.type = "checkbox";
-            input.name = "Ornament" + i;
-            input.value = ornaments[i].name;
-            input.id = ornaments[i].name;
-
-            label = document.createElement("label");
-            label.setAttribute("for", ornaments[i].name);
-            label.innerText = ornaments[i].name + " (" + ornaments[i].price + "€)";
-
-            fieldset = document.getElementById("ornaments");
-            let ornamentDiv: HTMLElement = document.createElement("div");
-
-            ornamentDiv.appendChild(input);
-            ornamentDiv.appendChild(label);
-            fieldset.appendChild(ornamentDiv);
-            fieldset.appendChild(document.createElement("br"));
-        }
-
-    } //close createInputs
 } //close Namespace
