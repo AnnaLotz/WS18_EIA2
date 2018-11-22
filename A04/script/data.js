@@ -19,7 +19,7 @@ var A4;
             { name: "Strohstere", price: 0.8 },
             { name: "Holzfigur", price: 2.5 }
         ],
-        "candles": [
+        "lights": [
             { name: "Rot Echtwachs", price: 2 },
             { name: "Weiß Echtwachs", price: 1.50 },
             { name: "Weiß Elektrisch", price: 3 },

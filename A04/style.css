@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes');
+@import url('https://fonts.googleapis.com/css?family=Mountains+of+Christmas');
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+
+div {
+	font-family: 'Dosis', cursive;
+	font-size: 105%;
+}
+
+h1 {
+	font-family: 'Mountains of Christmas', cursive;
+	font-size: 2em;
+	text-align: center;
+	background: #ff3232;
+}
+
+legend {
+	font-size: 120%;
+	font-family: 'Mountains of Christmas', cursive;
+}
+
+fieldset {
+	border-radius: 1em;
+}
+
+input[type=number] {
+	font-family: 'Dosis', cursive;
+	font-weight: bold;
+	padding-left: 1.5em;
+	margin-left: 1em;
+	border-radius: 0.5em;
+	width: 3em;
+}
+
+#products {
+	
+	float: left;
+	width: 40%;
+	margin-left: 1em;	
+}
+
+#shopper {
+	float: right;
+	width: 40%;
+	margin-right: 10em;
+	
+}

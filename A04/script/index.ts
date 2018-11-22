@@ -7,6 +7,7 @@ namespace A4 {
     let input: HTMLInputElement;
     let label: HTMLLabelElement;
 
+    let cart: AssocProd = {};
 
     /*__________________________________________________________  */
     function init(): void {
@@ -20,6 +21,25 @@ namespace A4 {
     } //close init
 
 
+    function handleChange(_event: Event): void {
+        let target: HTMLInputElement = <HTMLInputElement>_event.target;
+        refreshCart(target);
+        //        console.log("Changed " + target.name + " " + target.value + " to " + target.checked);
+
+        //stepper bei checkboxes hinzufügen/entfernen
+        if (target.type == "checkbox") {
+            if (target.checked == true) {
+                addStepper(target);
+            } else if (target.checked == false) {
+                removeStepper(target);
+            }
+        }
+    } //close handleChange
+
+    function refreshCart(_target: HTMLInputElement): void {
+        
+    } //close refreshCart
+
     function createInputs(): void {
         let div: Node;
         let groupAmount: number;
@@ -31,11 +51,11 @@ namespace A4 {
             let product: Product[] = products[key]; //das einzelne Produkt als Interface
             groupAmount = key.length; //menge der Produktgruppen, also Bäume, Kugeln...
             productsInGroupAmount = product.length; //Menge der Produkte in einer Gruppe, also Tanne, Fichte...
-            console.log(key);
+            //            console.log(key);
 
             fieldset = document.createElement("fieldset");
             legend = document.createElement("legend");
-            legend.innerText = key;
+            legend.innerText = key.toUpperCase();
             fieldset.appendChild(legend);
 
             //Schleife für jedes einzelne Produkt
@@ -67,35 +87,21 @@ namespace A4 {
         } //schleife produktgruppe ende
     } //close createInputs
 
-    function handleChange(_event: Event): void {
-        let target: HTMLInputElement = <HTMLInputElement>_event.target;
-        if (this.id != "trees" || this.id != "stands") {    
-            console.log("Changed " + target.name +  " " + target.value + " to " + target.checked);
-            if (target.type == "checkbox") {
-                if (target.checked == true)
-                    addStepper(target);
-                else if (target.checked == false) {
-                    removeStepper(target);
-                }
-            }
-        }
-    } //close handleChange
 
     function addStepper(_target: HTMLInputElement): void {
-        input = document.createElement("input");        
-        
+        input = document.createElement("input");
         input.type = "number";
         input.name = "stepper";
         input.step = "1";
         input.min = "1";
         input.max = "30";
         input.value = "1";
-        input.id = _target.name + "stepper";
+        input.id = _target.id + " stepper";
         document.getElementById(_target.id).nextSibling.appendChild(input);
     } //close addStepper
 
     function removeStepper(_target: HTMLInputElement): void {
-        document.getElementById(_target.id).nextSibling.removeChild(input);
+        document.getElementById(_target.id + " stepper").remove();
     } //close removeStepper
 
 } //close Namespace
