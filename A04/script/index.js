@@ -5,7 +5,7 @@ var A4;
     let legend;
     let input;
     let label;
-    let cart = {};
+    let cart = [];
     /*__________________________________________________________  */
     function init() {
         createInputs();
@@ -17,41 +17,62 @@ var A4;
     } //close init
     function handleChange(_event) {
         let target = _event.target;
-        refreshCart(target);
         //        console.log("Changed " + target.name + " " + target.value + " to " + target.checked);
         //stepper bei checkboxes hinzufügen/entfernen
         if (target.type == "checkbox") {
             if (target.checked == true) {
                 addStepper(target);
+                refreshCart(target, true);
             }
             else if (target.checked == false) {
                 removeStepper(target);
+                refreshCart(target, false);
             }
         }
+        else {
+            refreshCart(target, true);
+        }
     } //close handleChange
-    function refreshCart(_target) {
+    function refreshCart(_target, _add) {
+        let chosenProduct = {
+            name: _target.getAttribute("id"),
+            price: parseInt(_target.getAttribute("price")),
+            group: _target.getAttribute("productGroup"),
+            amount: 1
+        };
+        if (_add == true) {
+            cart.push(chosenProduct);
+        }
+        else {
+            let ind = cart.indexOf(chosenProduct);
+            cart.splice(ind, 1);
+        }
+        //Übersicht in der Konsol    
+        console.log("Ausgewähltes Produkt: ");
+        console.log(chosenProduct);
+        console.log("Aktueller Warenkorb: ");
+        console.log(cart);
+        console.log("====================");
     } //close refreshCart
     function createInputs() {
         let div;
-        let groupAmount;
-        let productsInGroupAmount;
         //Schleife für die Produktgruppe
         for (let key in A4.products) {
             let product = A4.products[key]; //das einzelne Produkt als Interface
-            groupAmount = key.length; //menge der Produktgruppen, also Bäume, Kugeln...
-            productsInGroupAmount = product.length; //Menge der Produkte in einer Gruppe, also Tanne, Fichte...
-            //            console.log(key);
             fieldset = document.createElement("fieldset");
             legend = document.createElement("legend");
             legend.innerText = key.toUpperCase();
             fieldset.appendChild(legend);
             //Schleife für jedes einzelne Produkt
-            for (let i = 0; i < productsInGroupAmount; i++) {
+            for (let i = 0; i < product.length; i++) {
                 //Allgemeinen Input definieren
                 input = document.createElement("input");
                 input.name = key;
                 input.value = A4.products[key][i].name;
                 input.id = A4.products[key][i].name;
+                input.setAttribute("productGroup", key);
+                input.setAttribute("productIndex", i.toString());
+                input.setAttribute("price", A4.products[key][i].price.toString());
                 //Label (Beschriftung)
                 label = document.createElement("label");
                 label.setAttribute("for", A4.products[key][i].name);
