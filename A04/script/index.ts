@@ -44,6 +44,7 @@ namespace A4 {
                 refreshCart(target, false);
             }
         } else {
+            
             refreshCart(target, true);
         }
     } //close handleChange
