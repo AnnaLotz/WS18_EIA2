@@ -7,6 +7,8 @@ namespace A4 {
     let input: HTMLInputElement;
     let label: HTMLLabelElement;
 
+    let product: Product[];
+
     interface CartProduct {
         name: string;
         price: number;
@@ -31,6 +33,12 @@ namespace A4 {
     function handleChange(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
 
+        let chosenProduct: CartProduct = {
+            name: target.getAttribute("id"),
+            price: parseInt(target.getAttribute("price")),
+            group: target.getAttribute("productGroup"),
+            amount: 1
+        };
 
         //        console.log("Changed " + target.name + " " + target.value + " to " + target.checked);
 
@@ -38,39 +46,46 @@ namespace A4 {
         if (target.type == "checkbox") {
             if (target.checked == true) {
                 addStepper(target);
-                refreshCart(target, true);
+                refreshCart(chosenProduct, true);
             } else if (target.checked == false) {
                 removeStepper(target);
-                refreshCart(target, false);
+                refreshCart(chosenProduct, false);
             }
+
         } else {
-            
-            refreshCart(target, true);
+
+            let l: number = cart.length;
+            if (l != 0) {
+                for (let k: number = 0; k < l; k++) {
+                    if (target.getAttribute("name") == cart[k].group) {
+                        cart.splice(k, 1);
+                        console.log("schon im cart"); 
+                    }
+                }
+            }
+            refreshCart(chosenProduct, true);
         }
+
+        console.log(cart);
+
     } //close handleChange
 
-    function refreshCart(_target: HTMLInputElement, _add: boolean): void {
 
-        let chosenProduct: CartProduct = {
-            name: _target.getAttribute("id"),
-            price: parseInt(_target.getAttribute("price")),
-            group: _target.getAttribute("productGroup"),
-            amount: 1
-        };
+    function refreshCart(_chosenProduct: CartProduct, _add: boolean): void {
 
         if (_add == true) {
-            cart.push(chosenProduct);
+            cart.push(_chosenProduct);
         } else {
-            let ind: number = cart.indexOf(chosenProduct);
+            let ind: number = cart.indexOf(_chosenProduct);
             cart.splice(ind, 1);
         }
 
         //Übersicht in der Konsol    
-        console.log("Ausgewähltes Produkt: ");
-        console.log(chosenProduct);
-        console.log("Aktueller Warenkorb: ");
-        console.log(cart);
-        console.log("====================");
+        //        console.log("Ausgewähltes Produkt: ");
+        //        console.log(_chosenProduct);
+        //        console.log("Aktueller Warenkorb: ");
+        //        console.log(cart);
+        //        console.log("====================");
 
     } //close refreshCart
 
@@ -80,7 +95,7 @@ namespace A4 {
         //Schleife für die Produktgruppe
         for (let key in products) {
 
-            let product: Product[] = products[key]; //das einzelne Produkt als Interface
+            product = products[key]; //das einzelne Produkt als Interface
 
             fieldset = document.createElement("fieldset");
             legend = document.createElement("legend");
