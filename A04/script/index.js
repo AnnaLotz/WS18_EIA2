@@ -18,35 +18,38 @@ var A4;
     } //close init
     function handleChange(_event) {
         let target = _event.target;
-        let chosenProduct = {
-            name: target.getAttribute("id"),
-            price: parseInt(target.getAttribute("price")),
-            group: target.getAttribute("productGroup"),
-            amount: 1
-        };
-        //        console.log("Changed " + target.name + " " + target.value + " to " + target.checked);
         //stepper bei checkboxes hinzufügen/entfernen
         if (target.type == "checkbox") {
             if (target.checked == true) {
                 addStepper(target);
-                refreshCart(chosenProduct, true);
             }
             else if (target.checked == false) {
                 removeStepper(target);
-                refreshCart(chosenProduct, false);
             }
         }
-        else {
-            let l = cart.length;
-            if (l != 0) {
-                for (let k = 0; k < l; k++) {
-                    if (target.getAttribute("name") == cart[k].group) {
-                        cart.splice(k, 1);
-                        console.log("schon im cart");
-                    }
+        //Warenkorb leeren und komplett neu befüllen
+        cart = [];
+        let inputs = document.getElementById("products").getElementsByTagName("input");
+        let chosenProduct;
+        let currentAmount;
+        for (let i = 0; i < inputs.length; i++) {
+            let input = inputs[i];
+            if (input.checked == true) {
+                if (input.type == "checkbox") {
+                    let associatedStepper = document.getElementById(input.id + " stepper");
+                    currentAmount = parseInt(associatedStepper.value);
                 }
+                else {
+                    currentAmount = 1;
+                }
+                chosenProduct = {
+                    name: input.getAttribute("id"),
+                    price: parseInt(input.getAttribute("price")),
+                    group: input.getAttribute("productGroup"),
+                    amount: currentAmount
+                };
+                cart.push(chosenProduct);
             }
-            refreshCart(chosenProduct, true);
         }
         console.log(cart);
     } //close handleChange
@@ -113,6 +116,7 @@ var A4;
         input.max = "30";
         input.value = "1";
         input.id = _target.id + " stepper";
+        input.setAttribute("product", _target.id);
         document.getElementById(_target.id).nextSibling.appendChild(input);
     } //close addStepper
     function removeStepper(_target) {

@@ -33,38 +33,44 @@ namespace A4 {
     function handleChange(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
 
-        let chosenProduct: CartProduct = {
-            name: target.getAttribute("id"),
-            price: parseInt(target.getAttribute("price")),
-            group: target.getAttribute("productGroup"),
-            amount: 1
-        };
-
-        //        console.log("Changed " + target.name + " " + target.value + " to " + target.checked);
-
         //stepper bei checkboxes hinzufügen/entfernen
         if (target.type == "checkbox") {
             if (target.checked == true) {
                 addStepper(target);
-                refreshCart(chosenProduct, true);
             } else if (target.checked == false) {
                 removeStepper(target);
-                refreshCart(chosenProduct, false);
             }
-
-        } else {
-
-            let l: number = cart.length;
-            if (l != 0) {
-                for (let k: number = 0; k < l; k++) {
-                    if (target.getAttribute("name") == cart[k].group) {
-                        cart.splice(k, 1);
-                        console.log("schon im cart"); 
-                    }
-                }
-            }
-            refreshCart(chosenProduct, true);
         }
+
+        //Warenkorb leeren und komplett neu befüllen
+
+        cart = [];
+        let inputs: NodeListOf<HTMLInputElement> = document.getElementById("products").getElementsByTagName("input");
+        let chosenProduct: CartProduct;
+        let currentAmount: number;
+
+
+        for (let i: number = 0; i < inputs.length; i++) {
+            let input: HTMLInputElement = inputs[i];
+
+            if (input.checked == true) {
+                if (input.type == "checkbox") {
+                    let associatedStepper: HTMLInputElement = <HTMLInputElement>document.getElementById(input.id + " stepper");
+                    currentAmount = parseInt(associatedStepper.value);
+                } else {
+                    currentAmount = 1;
+                }
+                
+                chosenProduct = {
+                    name: input.getAttribute("id"),
+                    price: parseInt(input.getAttribute("price")),
+                    group: input.getAttribute("productGroup"),
+                    amount: currentAmount
+                };
+                cart.push(chosenProduct);
+            }
+        }
+
 
         console.log(cart);
 
@@ -145,6 +151,7 @@ namespace A4 {
         input.max = "30";
         input.value = "1";
         input.id = _target.id + " stepper";
+        input.setAttribute("product", _target.id);
         document.getElementById(_target.id).nextSibling.appendChild(input);
     } //close addStepper
 
