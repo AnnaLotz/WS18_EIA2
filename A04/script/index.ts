@@ -6,6 +6,7 @@ namespace A4 {
     let legend: HTMLElement;
     let input: HTMLInputElement;
     let label: HTMLLabelElement;
+    let readyToOrder: boolean;
 
     let product: Product[];
 
@@ -24,7 +25,7 @@ namespace A4 {
         document.getElementById("buy").addEventListener("click", checkOrder);
         createInputs();
         displayCart();
-        
+
 
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
         for (let i: number = 0; i < fieldsets.length; i++) {
@@ -34,8 +35,22 @@ namespace A4 {
     } //close init
 
     function checkOrder(): void {
+        console.log("buttonClick");
+        readyToOrder = true;
+        console.log("readyToOrder true");
         let inputs: NodeListOf<HTMLInputElement> = document.getElementById("shopper").getElementsByTagName("input");
-        
+        for (let i: number = 0; i < inputs.length; i++) {
+            let input: HTMLInputElement = inputs[i];
+            if (input.value == "") {
+                readyToOrder = false;
+                console.log("readyToOrder false");
+            }
+            
+
+        }
+        if (readyToOrder == false) {
+            alert("Bitte alle Felder ausfüllen");
+        }
     } //close  checkOrder
 
     function handleChange(_event: Event): void {

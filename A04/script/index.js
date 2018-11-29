@@ -5,6 +5,7 @@ var A4;
     let legend;
     let input;
     let label;
+    let readyToOrder;
     let product;
     let cart = [];
     let cartPrice = 0;
@@ -20,7 +21,20 @@ var A4;
         }
     } //close init
     function checkOrder() {
+        console.log("buttonClick");
+        readyToOrder = true;
+        console.log("readyToOrder true");
         let inputs = document.getElementById("shopper").getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; i++) {
+            let input = inputs[i];
+            if (input.value == "") {
+                readyToOrder = false;
+                console.log("readyToOrder false");
+            }
+        }
+        if (readyToOrder == false) {
+            alert("Bitte alle Felder ausfüllen");
+        }
     } //close  checkOrder
     function handleChange(_event) {
         let target = _event.target;
