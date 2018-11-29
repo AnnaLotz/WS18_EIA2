@@ -17,10 +17,14 @@ namespace A4 {
     }
 
     let cart: CartProduct[] = [];
+    let cartPrice: number = 0;
 
     /*__________________________________________________________  */
     function init(): void {
+        document.getElementById("buy").addEventListener("click", checkOrder);
         createInputs();
+        displayCart();
+        
 
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
         for (let i: number = 0; i < fieldsets.length; i++) {
@@ -29,6 +33,10 @@ namespace A4 {
         }
     } //close init
 
+    function checkOrder(): void {
+        let inputs: NodeListOf<HTMLInputElement> = document.getElementById("shopper").getElementsByTagName("input");
+        
+    } //close  checkOrder
 
     function handleChange(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
@@ -49,7 +57,6 @@ namespace A4 {
         let chosenProduct: CartProduct;
         let currentAmount: number;
 
-
         for (let i: number = 0; i < inputs.length; i++) {
             let input: HTMLInputElement = inputs[i];
 
@@ -60,10 +67,10 @@ namespace A4 {
                 } else {
                     currentAmount = 1;
                 }
-                
+
                 chosenProduct = {
                     name: input.getAttribute("id"),
-                    price: parseInt(input.getAttribute("price")),
+                    price: Number(input.getAttribute("price")),
                     group: input.getAttribute("productGroup"),
                     amount: currentAmount
                 };
@@ -71,29 +78,50 @@ namespace A4 {
             }
         }
 
-
-        console.log(cart);
-
+        calcPrice();
+        displayCart();
     } //close handleChange
 
 
-    function refreshCart(_chosenProduct: CartProduct, _add: boolean): void {
+    function displayCart(): void {
 
-        if (_add == true) {
-            cart.push(_chosenProduct);
-        } else {
-            let ind: number = cart.indexOf(_chosenProduct);
-            cart.splice(ind, 1);
+        let cartProductsDiv: HTMLElement = document.getElementById("cartProducts");
+        cartProductsDiv.innerHTML = "";
+        let content: string = "";
+        for (let i: number = 0; i < cart.length; i++) {
+            content += cart[i].name;
+            if (cart[i].amount != 1) {
+                content += " *" + cart[i].amount;
+            }
+            content += "<br>";
         }
+        content += "<hr>";
+        content += "Gesamtpreis: ";
+        cartProductsDiv.innerHTML = content;
 
-        //Übersicht in der Konsol    
-        //        console.log("Ausgewähltes Produkt: ");
-        //        console.log(_chosenProduct);
-        //        console.log("Aktueller Warenkorb: ");
-        //        console.log(cart);
-        //        console.log("====================");
+        let cartPriceDiv: HTMLElement = document.getElementById("cartPrice");
+        cartPriceDiv.innerHTML = "";
+        let priceContent: string = "";
 
-    } //close refreshCart
+        for (let i: number = 0; i < cart.length; i++) {
+            let price: number = cart[i].amount * Number(cart[i].price);
+            priceContent += price.toFixed(2) + "€";
+            priceContent += "<br>";
+
+        }
+        priceContent += "<hr>";
+        priceContent += cartPrice.toFixed(2) + "€";
+        cartPriceDiv.innerHTML = priceContent;
+    } //close displayCart
+
+
+    function calcPrice(): void {
+        cartPrice = 0;
+        for (let i: number = 0; i < cart.length; i++) {
+            cartPrice += cart[i].price * cart[i].amount;
+        }
+    } //close calcPrice
+
 
     function createInputs(): void {
         let div: Node;
@@ -123,14 +151,16 @@ namespace A4 {
                 //Label (Beschriftung)
                 label = document.createElement("label");
                 label.setAttribute("for", products[key][i].name);
-                label.innerText = products[key][i].name + " (" + products[key][i].price + "€)";
+                label.innerText = products[key][i].name + " (" + products[key][i].price + " €)";
                 //Ins HTML anhängen
                 fieldset.appendChild(input);
                 fieldset.appendChild(label);
                 div = document.getElementById("products");
                 div.appendChild(fieldset);
                 //input typ definieren
-                if (key == "trees" || key == "stands") {
+                if (key == "shipping") {
+                    input.type = "radio";
+                } else if (key == "trees" || key == "stands") {
                     input.type = "radio";
                 } else {
                     input.type = "checkbox";

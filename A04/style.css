@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+
 @import url('https://fonts.googleapis.com/css?family=Great+Vibes');
-@import url('https://fonts.googleapis.com/css?family=Mountains+of+Christmas');
+
+@import
+	url('https://fonts.googleapis.com/css?family=Mountains+of+Christmas');
+
 @import url('https://fonts.googleapis.com/css?family=Dosis');
 
 div {
@@ -13,6 +17,7 @@ h1 {
 	font-size: 2em;
 	text-align: center;
 	background: #ff3232;
+	padding: 0.15em;
 }
 
 legend {
@@ -22,6 +27,7 @@ legend {
 
 fieldset {
 	border-radius: 1em;
+	margin-bottom: 0.5em;
 }
 
 input[type=number] {
@@ -34,15 +40,32 @@ input[type=number] {
 }
 
 #products {
-	
 	float: left;
 	width: 40%;
-	margin-left: 1em;	
+	margin-left: 1em;
 }
 
 #shopper {
 	float: right;
 	width: 40%;
 	margin-right: 5em;
-	
+}
+
+#cartProducts {
+	float: left;
+	width: auto;
+}
+
+#cartPrice {
+	float: right;
+	right: 1em;
+	text-align: right;
+}
+
+button {
+	font-family: 'Dosis', cursive;
+	font-weight: bold;
+	font-size: 0.9em;
+	margin-top: 1em;
+	padding: 0.5em;
 }

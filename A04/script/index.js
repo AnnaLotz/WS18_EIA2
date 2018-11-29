@@ -7,15 +7,21 @@ var A4;
     let label;
     let product;
     let cart = [];
+    let cartPrice = 0;
     /*__________________________________________________________  */
     function init() {
+        document.getElementById("buy").addEventListener("click", checkOrder);
         createInputs();
+        displayCart();
         let fieldsets = document.getElementsByTagName("fieldset");
         for (let i = 0; i < fieldsets.length; i++) {
             let fieldset = fieldsets[i];
             fieldset.addEventListener("change", handleChange);
         }
     } //close init
+    function checkOrder() {
+        let inputs = document.getElementById("shopper").getElementsByTagName("input");
+    } //close  checkOrder
     function handleChange(_event) {
         let target = _event.target;
         //stepper bei checkboxes hinzufügen/entfernen
@@ -44,30 +50,48 @@ var A4;
                 }
                 chosenProduct = {
                     name: input.getAttribute("id"),
-                    price: parseInt(input.getAttribute("price")),
+                    price: Number(input.getAttribute("price")),
                     group: input.getAttribute("productGroup"),
                     amount: currentAmount
                 };
                 cart.push(chosenProduct);
             }
         }
-        console.log(cart);
+        calcPrice();
+        displayCart();
     } //close handleChange
-    function refreshCart(_chosenProduct, _add) {
-        if (_add == true) {
-            cart.push(_chosenProduct);
+    function displayCart() {
+        let cartProductsDiv = document.getElementById("cartProducts");
+        cartProductsDiv.innerHTML = "";
+        let content = "";
+        for (let i = 0; i < cart.length; i++) {
+            content += cart[i].name;
+            if (cart[i].amount != 1) {
+                content += " *" + cart[i].amount;
+            }
+            content += "<br>";
         }
-        else {
-            let ind = cart.indexOf(_chosenProduct);
-            cart.splice(ind, 1);
+        content += "<hr>";
+        content += "Gesamtpreis: ";
+        cartProductsDiv.innerHTML = content;
+        let cartPriceDiv = document.getElementById("cartPrice");
+        cartPriceDiv.innerHTML = "";
+        let priceContent = "";
+        for (let i = 0; i < cart.length; i++) {
+            let price = cart[i].amount * Number(cart[i].price);
+            priceContent += price.toFixed(2) + "€";
+            priceContent += "<br>";
         }
-        //Übersicht in der Konsol    
-        //        console.log("Ausgewähltes Produkt: ");
-        //        console.log(_chosenProduct);
-        //        console.log("Aktueller Warenkorb: ");
-        //        console.log(cart);
-        //        console.log("====================");
-    } //close refreshCart
+        priceContent += "<hr>";
+        priceContent += cartPrice.toFixed(2) + "€";
+        cartPriceDiv.innerHTML = priceContent;
+    } //close displayCart
+    function calcPrice() {
+        cartPrice = 0;
+        for (let i = 0; i < cart.length; i++) {
+            cartPrice += cart[i].price * cart[i].amount;
+        }
+    } //close calcPrice
     function createInputs() {
         let div;
         //Schleife für die Produktgruppe
@@ -90,14 +114,17 @@ var A4;
                 //Label (Beschriftung)
                 label = document.createElement("label");
                 label.setAttribute("for", A4.products[key][i].name);
-                label.innerText = A4.products[key][i].name + " (" + A4.products[key][i].price + "€)";
+                label.innerText = A4.products[key][i].name + " (" + A4.products[key][i].price + " €)";
                 //Ins HTML anhängen
                 fieldset.appendChild(input);
                 fieldset.appendChild(label);
                 div = document.getElementById("products");
                 div.appendChild(fieldset);
                 //input typ definieren
-                if (key == "trees" || key == "stands") {
+                if (key == "shipping") {
+                    input.type = "radio";
+                }
+                else if (key == "trees" || key == "stands") {
                     input.type = "radio";
                 }
                 else {

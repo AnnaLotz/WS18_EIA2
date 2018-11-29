@@ -12,12 +12,26 @@
 	<h1>Build your personal Christmas Tree</h1>
 
 	<div id="products"></div>
-	
+
 	<div id="shopper">
 		<fieldset id="cartField">
 			<legend>WARENKORB</legend>
+			<div id="cartProducts"></div>
+			<div id="cartPrice"></div>
 		</fieldset>
-		<button>Bestellen</button>
+
+
+		<fieldset id="userAdress">
+			<legend>LIEFERADRESSE</legend>
+			<input type="text" name="forename" placeholder="Vorname">
+			<input type="text" name="surname" placeholder="Nachname"><br>
+			<input type="text" name="street" placeholder="Straße">
+			<input type="text" name="housenumber" placeholder="Hausnummer"><br>
+			<input type="text" name="postCode" placeholder="PLZ"  pattern="[0-9]">
+			<input type="text" name="city" placeholder="Stadt">
+			
+		</fieldset>
+		<button id="buy">Bestellen</button>
 	</div>
 
 </body>
