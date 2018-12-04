@@ -6,8 +6,8 @@ namespace A6 {
     let legend: HTMLElement;
     let input: HTMLInputElement;
     let label: HTMLLabelElement;
-    let readyToOrder: boolean;
-    let shippingChosen: boolean = false;
+//    let readyToOrder: boolean;
+//    let shippingChosen: boolean = false;
 
     let product: Product[];
 
