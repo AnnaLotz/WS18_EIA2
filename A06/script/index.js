@@ -1,5 +1,5 @@
-var A4;
-(function (A4) {
+var A6;
+(function (A6) {
     document.addEventListener("DOMContentLoaded", init);
     let fieldset;
     let legend;
@@ -12,7 +12,7 @@ var A4;
     let cartPrice = 0;
     /*__________________________________________________________  */
     function init() {
-        document.getElementById("buy").addEventListener("click", checkOrder);
+        //        document.getElementById("buy").addEventListener("click", checkOrder);
         createInputs();
         displayCart();
         let fieldsets = document.getElementsByTagName("fieldset");
@@ -24,8 +24,8 @@ var A4;
     function createInputs() {
         let div;
         //Schleife für die Produktgruppe
-        for (let key in A4.products) {
-            product = A4.products[key]; //das einzelne Produkt als Interface
+        for (let key in A6.products) {
+            product = A6.products[key]; //das einzelne Produkt als Interface
             fieldset = document.createElement("fieldset");
             legend = document.createElement("legend");
             legend.innerText = key.toUpperCase();
@@ -35,15 +35,15 @@ var A4;
                 //Allgemeinen Input definieren
                 input = document.createElement("input");
                 input.name = key;
-                input.value = A4.products[key][i].name;
-                input.id = A4.products[key][i].name;
+                input.value = A6.products[key][i].name;
+                input.id = A6.products[key][i].name;
                 input.setAttribute("productGroup", key);
                 input.setAttribute("productIndex", i.toString());
-                input.setAttribute("price", A4.products[key][i].price.toString());
+                input.setAttribute("price", A6.products[key][i].price.toString());
                 //Label (Beschriftung)
                 label = document.createElement("label");
-                label.setAttribute("for", A4.products[key][i].name);
-                label.innerText = A4.products[key][i].name + " (" + A4.products[key][i].price + " €)";
+                label.setAttribute("for", A6.products[key][i].name);
+                label.innerText = A6.products[key][i].name + " (" + A6.products[key][i].price + " €)";
                 //Ins HTML anhängen
                 fieldset.appendChild(input);
                 fieldset.appendChild(label);
@@ -133,16 +133,18 @@ var A4;
             cartPrice += cart[i].price * cart[i].amount;
         }
     } //close calcPrice
-    function checkOrder() {
+    /*
+    function checkOrder(): void {
         readyToOrder = true;
-        let inputs = document.getElementById("shopper").getElementsByTagName("input");
-        for (let i = 0; i < inputs.length; i++) {
-            let input = inputs[i];
+        let inputs: NodeListOf<HTMLInputElement> = document.getElementById("shopper").getElementsByTagName("input");
+        for (let i: number = 0; i < inputs.length; i++) {
+            let input: HTMLInputElement = inputs[i];
             if (input.value == "") {
                 readyToOrder = false;
             }
         }
-        for (let i = 0; i < cart.length; i++) {
+
+        for (let i: number = 0; i < cart.length; i++) {
             if (cart[i].group == "shipping") {
                 shippingChosen = true;
             }
@@ -150,15 +152,15 @@ var A4;
         if (shippingChosen == true) {
             if (readyToOrder == false) {
                 alert("Bitte alle Felder ausfüllen");
-            }
-            else {
+            } else {
                 alert("Ihre Bestellung wurde aufgenommen");
             }
-        }
-        else {
+        } else {
             alert("Bitte Versandart auswählen");
         }
+
     } //close  checkOrder
+    */
     function addStepper(_target) {
         input = document.createElement("input");
         input.type = "number";
@@ -174,5 +176,5 @@ var A4;
     function removeStepper(_target) {
         document.getElementById(_target.id + " stepper").remove();
     } //close removeStepper
-})(A4 || (A4 = {})); //close Namespace
+})(A6 || (A6 = {})); //close Namespace  
 //# sourceMappingURL=index.js.map

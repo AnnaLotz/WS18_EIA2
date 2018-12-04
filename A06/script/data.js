@@ -7,8 +7,8 @@ var A6;
             { name: "Blautanne", price: 30 }
         ],
         "stands": [
-            { name: "Runder Ständer Klassisch grün", price: 38 },
-            { name: "Metallständer silber", price: 46 }
+            { name: "Runder Staender Klassisch gruen", price: 38 },
+            { name: "Metallstaender silber", price: 46 }
         ],
         "baubles": [
             { name: "Glaskugel Rot", price: 0.49 },
@@ -31,5 +31,5 @@ var A6;
             { name: "Express", price: 8.99 }
         ]
     };
-})(A6 || (A6 = {})); //namespace zu
+})(A6 || (A6 = {})); //namespace zu  
 //# sourceMappingURL=data.js.map

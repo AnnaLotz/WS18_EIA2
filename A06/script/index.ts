@@ -1,5 +1,5 @@
 namespace A6 {
-
+   
     document.addEventListener("DOMContentLoaded", init);
 
     let fieldset: HTMLElement;
@@ -24,7 +24,7 @@ namespace A6 {
     /*__________________________________________________________  */
     
     function init(): void {
-        document.getElementById("buy").addEventListener("click", checkOrder);
+//        document.getElementById("buy").addEventListener("click", checkOrder);
         createInputs();
         displayCart();
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
@@ -157,6 +157,7 @@ namespace A6 {
         }
     } //close calcPrice
     
+    /*
     function checkOrder(): void {
         readyToOrder = true;
         let inputs: NodeListOf<HTMLInputElement> = document.getElementById("shopper").getElementsByTagName("input");
@@ -183,6 +184,7 @@ namespace A6 {
         }
 
     } //close  checkOrder
+    */
     
     function addStepper(_target: HTMLInputElement): void {
         input = document.createElement("input");
@@ -201,4 +203,4 @@ namespace A6 {
         document.getElementById(_target.id + " stepper").remove();
     } //close removeStepper
 
-} //close Namespace
+} //close Namespace  
