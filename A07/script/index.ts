@@ -1,13 +1,13 @@
 namespace A7 {
-   
+
     document.addEventListener("DOMContentLoaded", init);
 
     let fieldset: HTMLElement;
     let legend: HTMLElement;
     let input: HTMLInputElement;
     let label: HTMLLabelElement;
-//    let readyToOrder: boolean;
-//    let shippingChosen: boolean = false;
+    let readyToOrder: boolean;
+    let shippingChosen: boolean = false;
 
     let product: Product[];
 
@@ -22,9 +22,9 @@ namespace A7 {
     let cartPrice: number = 0;
 
     /*__________________________________________________________  */
-    
+
     function init(): void {
-//        document.getElementById("buy").addEventListener("click", checkOrder);
+        document.getElementById("check").addEventListener("click", checkOrder);
         createInputs();
         displayCart();
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
@@ -156,8 +156,7 @@ namespace A7 {
             cartPrice += cart[i].price * cart[i].amount;
         }
     } //close calcPrice
-    
-    /*
+
     function checkOrder(): void {
         readyToOrder = true;
         let inputs: NodeListOf<HTMLInputElement> = document.getElementById("shopper").getElementsByTagName("input");
@@ -175,21 +174,20 @@ namespace A7 {
         }
         if (shippingChosen == true) {
             if (readyToOrder == false) {
-                alert("Bitte alle Felder ausfüllen");
+                alert("Bitte Lieferadresse vollständig ausfüllen");
             } else {
-                alert("Ihre Bestellung wurde aufgenommen");
+                alert("Alle Angaben korrekt");
             }
         } else {
             alert("Bitte Versandart auswählen");
         }
 
     } //close  checkOrder
-    */
-    
+
     function addStepper(_target: HTMLInputElement): void {
         input = document.createElement("input");
         input.type = "number";
-        input.name = "stepper";
+        input.name = "stepper " + _target.id;
         input.step = "1";
         input.min = "1";
         input.max = "30";

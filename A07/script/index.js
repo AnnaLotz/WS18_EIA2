@@ -5,14 +5,14 @@ var A7;
     let legend;
     let input;
     let label;
-    //    let readyToOrder: boolean;
-    //    let shippingChosen: boolean = false;
+    let readyToOrder;
+    let shippingChosen = false;
     let product;
     let cart = [];
     let cartPrice = 0;
     /*__________________________________________________________  */
     function init() {
-        //        document.getElementById("buy").addEventListener("click", checkOrder);
+        document.getElementById("check").addEventListener("click", checkOrder);
         createInputs();
         displayCart();
         let fieldsets = document.getElementsByTagName("fieldset");
@@ -133,38 +133,36 @@ var A7;
             cartPrice += cart[i].price * cart[i].amount;
         }
     } //close calcPrice
-    /*
-    function checkOrder(): void {
+    function checkOrder() {
         readyToOrder = true;
-        let inputs: NodeListOf<HTMLInputElement> = document.getElementById("shopper").getElementsByTagName("input");
-        for (let i: number = 0; i < inputs.length; i++) {
-            let input: HTMLInputElement = inputs[i];
+        let inputs = document.getElementById("shopper").getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; i++) {
+            let input = inputs[i];
             if (input.value == "") {
                 readyToOrder = false;
             }
         }
-
-        for (let i: number = 0; i < cart.length; i++) {
+        for (let i = 0; i < cart.length; i++) {
             if (cart[i].group == "shipping") {
                 shippingChosen = true;
             }
         }
         if (shippingChosen == true) {
             if (readyToOrder == false) {
-                alert("Bitte alle Felder ausfüllen");
-            } else {
-                alert("Ihre Bestellung wurde aufgenommen");
+                alert("Bitte Lieferadresse vollständig ausfüllen");
             }
-        } else {
+            else {
+                alert("Alle Angaben korrekt");
+            }
+        }
+        else {
             alert("Bitte Versandart auswählen");
         }
-
     } //close  checkOrder
-    */
     function addStepper(_target) {
         input = document.createElement("input");
         input.type = "number";
-        input.name = "stepper";
+        input.name = "stepper " + _target.id;
         input.step = "1";
         input.min = "1";
         input.max = "30";
