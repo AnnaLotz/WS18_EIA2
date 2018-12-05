@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Merry Christmas</title>
+<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+<script src="script/index.js" type="text/javascript" charset="utf-8"></script>
+<script src="script/data.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<h1>Build your personal Christmas Tree</h1>
+
+	<form id="formAll" action="https://eia2-257449.herokuapp.com" method="get" accept-charset="utf-8">
+		<div id="products"></div>
+
+		<div id="shopper">
+			<fieldset id="cartField">
+				<legend>WARENKORB</legend>
+				<div id="cartProducts"></div>
+				<div id="cartPrice"></div>
+			</fieldset>
+
+
+			<fieldset id="userAdress">
+				<legend>LIEFERADRESSE</legend>
+				<input type="text" name="forename" placeholder="Vorname"> <input
+					type="text" name="surname" placeholder="Nachname"><br>
+				<input type="text" name="street" placeholder="Straße"> <input
+					type="text" name="housenumber" placeholder="Hausnummer"><br>
+				<input type="text" name="postCode" placeholder="PLZ">
+				<input type="text" name="city" placeholder="Stadt">
+
+			</fieldset>
+			<button type="submit" id="buy">Bestellen</button>
+		</div>
+	</form>
+
+</body>
+
+</html>
