@@ -37,7 +37,6 @@ var A7;
                 }
                 else if (input.type == "checkbox") {
                     let associatedStepper = document.getElementById(input.id + " stepper");
-                    //                    amount = parseInt();
                     sendRequestWithCustomData(input.value, associatedStepper.value);
                 }
             }

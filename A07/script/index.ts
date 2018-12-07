@@ -50,7 +50,6 @@ namespace A7 {
                     sendRequestWithCustomData(input.value, "1");
                 } else if (input.type == "checkbox") {
                     let associatedStepper: HTMLInputElement = <HTMLInputElement>document.getElementById(input.id + " stepper");
-                    //                    amount = parseInt();
                     sendRequestWithCustomData(input.value, associatedStepper.value);
                 }
             }
