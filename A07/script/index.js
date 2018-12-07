@@ -10,9 +10,14 @@ var A7;
     let product;
     let cart = [];
     let cartPrice = 0;
+    let inputs;
+    let address = "http://localhost:8100";
+    //let address: string = "https://eia2-257449.herokuapp.com";
     /*__________________________________________________________  */
     function init() {
         document.getElementById("check").addEventListener("click", checkOrder);
+        document.getElementById("ajax").addEventListener("click", handleClickOnAsync);
+        document.getElementById("response").style.display = "none";
         createInputs();
         displayCart();
         let fieldsets = document.getElementsByTagName("fieldset");
@@ -21,6 +26,43 @@ var A7;
             fieldset.addEventListener("change", handleChange);
         }
     } //close init
+    function handleClickOnAsync(_event) {
+        document.getElementById("responseDiv").innerHTML = "";
+        inputs = document.getElementsByTagName("input");
+        for (let i = 0; i < inputs.length; i++) {
+            input = inputs[i];
+            if (input.checked == true) {
+                if (input.type == "radio") {
+                    sendRequestWithCustomData(input.value, "1");
+                }
+                else if (input.type == "checkbox") {
+                    let associatedStepper = document.getElementById(input.id + " stepper");
+                    //                    amount = parseInt();
+                    sendRequestWithCustomData(input.value, associatedStepper.value);
+                }
+            }
+            if (input.type == "text") {
+                if (input.value != "") {
+                    sendRequestWithCustomData(input.name, input.value);
+                }
+            }
+        }
+    } //close handleClickOnAsync
+    function sendRequestWithCustomData(_productKey, _productValue) {
+        document.getElementById("response").style.display = "initial";
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", address + "?" + _productKey + "=" + _productValue, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    } //close sendRequestWithCustomData
+    function handleStateChange(_event) {
+        let xhr = _event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
+            document.getElementById("responseDiv").innerHTML += xhr.response;
+        }
+    } //close handleStateChange
     function createInputs() {
         let div;
         //Schleife für die Produktgruppe
@@ -58,6 +100,7 @@ var A7;
                 }
                 else {
                     input.type = "checkbox";
+                    input.name = ""; //damit kein wert in der query steht, Objekt wird über den stepper übergeben
                 }
                 fieldset.appendChild(document.createElement("br"));
             } //schleife einzelnes Produkt ende
@@ -76,7 +119,7 @@ var A7;
         }
         //Warenkorb leeren und komplett neu befüllen
         cart = [];
-        let inputs = document.getElementById("products").getElementsByTagName("input");
+        inputs = document.getElementById("products").getElementsByTagName("input");
         let chosenProduct;
         let currentAmount;
         for (let i = 0; i < inputs.length; i++) {

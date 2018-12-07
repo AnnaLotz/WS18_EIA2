@@ -10,21 +10,26 @@ namespace A7 {
     let shippingChosen: boolean = false;
 
     let product: Product[];
-
     interface CartProduct {
         name: string;
         price: number;
         group: string;
         amount: number;
     }
-
     let cart: CartProduct[] = [];
     let cartPrice: number = 0;
+
+    let inputs: NodeListOf<HTMLInputElement>;
+
+    let address: string = "http://localhost:8100";
+    //let address: string = "https://eia2-257449.herokuapp.com";
 
     /*__________________________________________________________  */
 
     function init(): void {
         document.getElementById("check").addEventListener("click", checkOrder);
+        document.getElementById("ajax").addEventListener("click", handleClickOnAsync);
+        document.getElementById("response").style.display = "none";
         createInputs();
         displayCart();
         let fieldsets: NodeListOf<HTMLFieldSetElement> = document.getElementsByTagName("fieldset");
@@ -33,6 +38,48 @@ namespace A7 {
             fieldset.addEventListener("change", handleChange);
         }
     } //close init
+
+    function handleClickOnAsync(_event: Event): void {
+
+        document.getElementById("responseDiv").innerHTML = "";
+        inputs = document.getElementsByTagName("input");
+        for (let i: number = 0; i < inputs.length; i++) {
+            input = inputs[i];
+            if (input.checked == true) {
+                if (input.type == "radio") {
+                    sendRequestWithCustomData(input.value, "1");
+                } else if (input.type == "checkbox") {
+                    let associatedStepper: HTMLInputElement = <HTMLInputElement>document.getElementById(input.id + " stepper");
+                    //                    amount = parseInt();
+                    sendRequestWithCustomData(input.value, associatedStepper.value);
+                }
+            }
+            if (input.type == "text") {
+                if (input.value != "") {
+                    sendRequestWithCustomData(input.name, input.value);
+                }
+            }
+        }
+
+    } //close handleClickOnAsync
+
+    function sendRequestWithCustomData(_productKey: string, _productValue: string): void {
+        document.getElementById("response").style.display = "initial";
+        let xhr: XMLHttpRequest = new XMLHttpRequest();
+        xhr.open("GET", address + "?" + _productKey + "=" + _productValue, true);
+        xhr.addEventListener("readystatechange", handleStateChange);
+        xhr.send();
+    } //close sendRequestWithCustomData
+
+    function handleStateChange(_event: ProgressEvent): void {
+        let xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
+            console.log("response: " + xhr.response);
+
+            document.getElementById("responseDiv").innerHTML += xhr.response;
+        }
+    } //close handleStateChange
 
     function createInputs(): void {
         let div: Node;
@@ -72,6 +119,7 @@ namespace A7 {
                     input.type = "radio";
                 } else {
                     input.type = "checkbox";
+                    input.name = ""; //damit kein wert in der query steht, Objekt wird über den stepper übergeben
                 }
 
                 fieldset.appendChild(document.createElement("br"));
@@ -92,7 +140,7 @@ namespace A7 {
 
         //Warenkorb leeren und komplett neu befüllen
         cart = [];
-        let inputs: NodeListOf<HTMLInputElement> = document.getElementById("products").getElementsByTagName("input");
+        inputs = document.getElementById("products").getElementsByTagName("input");
         let chosenProduct: CartProduct;
         let currentAmount: number;
 

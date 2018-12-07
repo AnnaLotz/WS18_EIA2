@@ -26,6 +26,8 @@ legend {
 }
 
 fieldset {
+	border-style: solid;
+	border-color: #555;
 	border-radius: 1em;
 	margin-bottom: 0.5em;
 }
@@ -76,5 +78,12 @@ button {
 
 button:hover {
 	background-color: #FF4748;
-	
+}
+
+.fieldsetHidden {
+	display: none;
+}
+
+#response {
+
 }

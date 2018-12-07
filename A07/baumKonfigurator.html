@@ -11,7 +11,8 @@
 <body>
 	<h1>Build your personal Christmas Tree</h1>
 
-	<form id="formAll" action="https://eia2-257449.herokuapp.com" method="get" accept-charset="utf-8">
+	<form id="formAll" action="https://eia2-257449.herokuapp.com"
+		method="get" accept-charset="utf-8">
 		<div id="products"></div>
 
 		<div id="shopper">
@@ -28,13 +29,22 @@
 					type="text" name="surname" placeholder="Nachname"><br>
 				<input type="text" name="street" placeholder="Straße"> <input
 					type="text" name="housenumber" placeholder="Hausnummer"><br>
-				<input type="text" name="postCode" placeholder="PLZ">
-				<input type="text" name="city" placeholder="Stadt">
+				<input type="text" name="postCode" placeholder="PLZ"> <input
+					type="text" name="city" placeholder="Stadt">
 
 			</fieldset>
 			<button type="button" id="check">Angaben Prüfen</button>
-			<button type="submit" id="buy">Bestellen</button>
+			<button type="submit" id="submit">Submit</button>
+			<button type="button" id="ajax">Submit with ajax</button>
+
+			<br><br>
+			<fieldset id="response">
+				<legend>IHRE BESTELLUNG</legend>
+				<div id="responseDiv"></div>
+			</fieldset>
 		</div>
+
+
 	</form>
 
 </body>
