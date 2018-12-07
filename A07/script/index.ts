@@ -8,6 +8,8 @@ namespace A7 {
     let label: HTMLLabelElement;
     let readyToOrder: boolean;
     let shippingChosen: boolean = false;
+    let dataToSend: boolean = false;
+
 
     let product: Product[];
     interface CartProduct {
@@ -48,16 +50,20 @@ namespace A7 {
             if (input.checked == true) {
                 if (input.type == "radio") {
                     sendRequestWithCustomData(input.value, "1");
+                    dataToSend = true;
                 } else if (input.type == "checkbox") {
                     let associatedStepper: HTMLInputElement = <HTMLInputElement>document.getElementById(input.id + " stepper");
                     sendRequestWithCustomData(input.value, associatedStepper.value);
+                    dataToSend = true;
                 }
-            }
-            if (input.type == "text") {
+            } else if (input.type == "text") {
                 if (input.value != "") {
                     sendRequestWithCustomData(input.name, input.value);
                 }
             }
+        }
+        if (dataToSend == false) {
+            alert("Es sind keine Daten eingegangen");
         }
 
     } //close handleClickOnAsync

@@ -7,6 +7,7 @@ var A7;
     let label;
     let readyToOrder;
     let shippingChosen = false;
+    let dataToSend = false;
     let product;
     let cart = [];
     let cartPrice = 0;
@@ -34,17 +35,22 @@ var A7;
             if (input.checked == true) {
                 if (input.type == "radio") {
                     sendRequestWithCustomData(input.value, "1");
+                    dataToSend = true;
                 }
                 else if (input.type == "checkbox") {
                     let associatedStepper = document.getElementById(input.id + " stepper");
                     sendRequestWithCustomData(input.value, associatedStepper.value);
+                    dataToSend = true;
                 }
             }
-            if (input.type == "text") {
+            else if (input.type == "text") {
                 if (input.value != "") {
                     sendRequestWithCustomData(input.name, input.value);
                 }
             }
+        }
+        if (dataToSend == false) {
+            alert("Es sind keine Daten eingegangen");
         }
     } //close handleClickOnAsync
     function sendRequestWithCustomData(_productKey, _productValue) {
