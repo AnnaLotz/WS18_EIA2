@@ -1,3 +1,12 @@
+interface Object {
+    [key: string]: number;    
+}
+
+let eia2: Object = { a: 1, b: 2, c: 3 };
+
+for (let key in eia2) {
+    console.log(key + eia2[key]);
+}
 
 
 

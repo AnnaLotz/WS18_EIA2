@@ -1,3 +1,7 @@
+let eia2 = { a: 1, b: 2, c: 3 };
+for (let key in eia2) {
+    console.log(key + eia2[key]);
+}
 /* ====L05====
 
 
