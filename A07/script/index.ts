@@ -23,6 +23,7 @@ namespace A7 {
 
     let inputs: NodeListOf<HTMLInputElement>;
 
+    let queryUrl: string = "";
     let address: string = "http://localhost:8100";
     //let address: string = "https://eia2-257449.herokuapp.com";
 
@@ -44,34 +45,37 @@ namespace A7 {
     function handleClickOnAsync(_event: Event): void {
 
         document.getElementById("responseDiv").innerHTML = "";
+        queryUrl = "";
         inputs = document.getElementsByTagName("input");
         for (let i: number = 0; i < inputs.length; i++) {
             input = inputs[i];
             if (input.checked == true) {
                 if (input.type == "radio") {
-                    sendRequestWithCustomData(input.value, "1");
+                    queryUrl += input.value + "=1&";
                     dataToSend = true;
                 } else if (input.type == "checkbox") {
                     let associatedStepper: HTMLInputElement = <HTMLInputElement>document.getElementById(input.id + " stepper");
-                    sendRequestWithCustomData(input.value, associatedStepper.value);
+                    queryUrl += input.value + "=" + associatedStepper.value + "&";
                     dataToSend = true;
                 }
             } else if (input.type == "text") {
                 if (input.value != "") {
-                    sendRequestWithCustomData(input.name, input.value);
+                    queryUrl += input.name + "=" + input.value + "&";
                 }
             }
         }
         if (dataToSend == false) {
             alert("Es sind keine Daten eingegangen");
+        } else {
+            sendRequestWithCustomData();
         }
 
     } //close handleClickOnAsync
 
-    function sendRequestWithCustomData(_productKey: string, _productValue: string): void {
+    function sendRequestWithCustomData(): void {
         document.getElementById("response").style.display = "initial";
         let xhr: XMLHttpRequest = new XMLHttpRequest();
-        xhr.open("GET", address + "?" + _productKey + "=" + _productValue, true);
+        xhr.open("GET", address + "?" + queryUrl, true);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
     } //close sendRequestWithCustomData
