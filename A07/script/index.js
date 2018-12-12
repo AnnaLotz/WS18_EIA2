@@ -13,8 +13,8 @@ var A7;
     let cartPrice = 0;
     let inputs;
     let queryUrl = "";
-    let address = "http://localhost:8100";
-    //let address: string = "https://eia2-257449.herokuapp.com";
+    //    let address: string = "http://localhost:8100";
+    let address = "https://eia2-257449.herokuapp.com";
     /*__________________________________________________________  */
     function init() {
         document.getElementById("check").addEventListener("click", checkOrder);

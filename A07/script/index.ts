@@ -24,8 +24,8 @@ namespace A7 {
     let inputs: NodeListOf<HTMLInputElement>;
 
     let queryUrl: string = "";
-    let address: string = "http://localhost:8100";
-    //let address: string = "https://eia2-257449.herokuapp.com";
+//    let address: string = "http://localhost:8100";
+    let address: string = "https://eia2-257449.herokuapp.com";
 
     /*__________________________________________________________  */
 
