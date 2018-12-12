@@ -82,6 +82,7 @@ namespace A7 {
 
     function handleStateChange(_event: ProgressEvent): void {
         let xhr: XMLHttpRequest = <XMLHttpRequest>_event.target;
+        console.log(xhr.readyState);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
             console.log("response: " + xhr.response);

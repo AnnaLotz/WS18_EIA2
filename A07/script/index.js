@@ -67,6 +67,7 @@ var A7;
     } //close sendRequestWithCustomData
     function handleStateChange(_event) {
         let xhr = _event.target;
+        console.log(xhr.readyState);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             console.log("ready: " + xhr.readyState, " | type: " + xhr.responseType, " | status:" + xhr.status, " | text:" + xhr.statusText);
             console.log("response: " + xhr.response);
