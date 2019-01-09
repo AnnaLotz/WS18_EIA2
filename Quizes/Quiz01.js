@@ -1,17 +1,28 @@
-let eia2 = { a: 1, b: 2, c: 3 };
+/* === L08 ===
+
+interface Object {
+    [key: string]: number;
+}
+
+let eia2: Object = { a: 1, b: 2, c: 3 };
+
 for (let key in eia2) {
     console.log(key + eia2[key]);
 }
+
+
+*/
 /* ====L05====
 
 
-//So ist es richtig:
+
+//So wäre es z.B. richtig:
 namespace MyProgramm {
-    let a: string = "This is some Text.";
-    writeText(a);
+    let text: string = "This is some Text."; //Variable klein schreiben, bezeichnenden englischen Namen wählen
+    writeText(text); //Funtkionsnamen klein beginnen, weitere Wörter darin groß beginnen - auch beim funktion deklarieren
     
-    function writeText(_übergabe: string): void {
-        document.getElementsByTagName("body")[0].innerText = _übergabe;
+    function writeText(_givenText: string): void { //Übergabeparameter mit Unterstrich beginnen, ebenfalls englschen Namen wählen
+        document.getElementsByTagName("body")[0].innerText = _givenText; //Übergabeparameter
     }
 }
 

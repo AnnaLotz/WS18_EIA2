@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<script src="Quiz01.js" type="text/javascript" charset="utf-8"></script>
 <body>
 
 	<form id="field1">
@@ -11,10 +12,11 @@
 	<br> Number:
 	<input type="text" name="number" value="	">
 	<br>
-	
+
 	<fieldset id="output"></fieldset>
-	
+
 	<button onclick="eiaQuiz()">Check</button>
+
 
 	<script>
 	document.getElementsByTagName("button")[0].addEventListener("click", eiaQuiz);
@@ -22,7 +24,7 @@
 			let x: HTMLElement = document.getElementById("field1");
 			let txt: string = "";
 			for (let i = 0; i < x.length; i++) {
-				txt += x.elements[i].value + "<br>";				
+				txt += x.elements[i].value + "<br>";		
 			}
 			document.getElementById("output").innerHtml= txt;			
 		}
