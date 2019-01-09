@@ -7,7 +7,6 @@ namespace L10_Animation {
     var imgData: ImageData;
 
     function init(_event: Event): void {
-        //        console.log("Canvas started");
 
         let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
         crc2 = canvas.getContext("2d");
@@ -18,13 +17,9 @@ namespace L10_Animation {
         crc2.fill();
         imgData = crc2.getImageData(0, 0, canvas.width, canvas.height);
 
-        for (let i: number = 0; i < 5; i++) {
+        for (let i: number = 0; i < 8; i++) {
             let star: Star = new Star();
-            star.x = Math.random() * ((crc2.canvas.width - 22) - 22) + 22; // Math.random() * (max - min) + min
-            star.y = Math.random() * ((crc2.canvas.height - 22) - 22) + 22;
-            star.dx = (Math.random() * 4 - 2) * star.speed;
-            star.dy = (Math.random() * 4 - 2) * star.speed;
-            star.color = star.getRandomColor();
+            star.giveAttributes(i);
             stars.push(star);
         }
 
@@ -38,7 +33,7 @@ namespace L10_Animation {
 
         for (let i: number = 0; i < stars.length; i++) {
             let star: Star = stars[i];
-            star.move();
+            star.move(i);
             star.draw(); // keine Parameter erforderlich, denn der Stern weiß über sich Bescheid
         }
 
