@@ -8,15 +8,16 @@ var GameDrawPaths;
         giveAttributes(_i) {
             this.x = Math.random() * ((GameDrawPaths.crc2.canvas.width - 22) - 22) + 22; // Math.random() * (max - min) + min
             this.y = Math.random() * ((GameDrawPaths.crc2.canvas.height - 22) - 22) + 22;
-            this.dx = (Math.random() * 4 - 2) * this.speed;
-            this.dy = (Math.random() * 4 - 2) * this.speed;
+            this.dx = (Math.random() * 4 - 2);
+            this.dy = (Math.random() * 4 - 2);
             this.color = this.getRandomColor();
         }
         move(_i) {
             this.checkPosition();
             this.checkHitWithAnother(_i);
-            this.x += this.dx;
-            this.y += this.dy;
+            this.x += this.dx * this.speed;
+            this.y += this.dy * this.speed;
+            this.speed += 0.005;
         }
         checkPosition() {
             if (this.x <= this.radius || this.x >= GameDrawPaths.crc2.canvas.width - this.radius) {

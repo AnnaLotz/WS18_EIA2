@@ -2,7 +2,7 @@ var GameDrawPaths;
 (function (GameDrawPaths) {
     window.onkeydown = handleKeyDown;
     window.onkeyup = handleKeyUp;
-    //wenn irgendeine Taste gedückt wird: über switch abfragen, welche Taste und somit jeweilige Funktion aufrufen bzw. Wert ändern
+    //wenn irgendeine Taste gedückt wird: über switch abfragen, welche Taste und somit jeweiligem Wert ändern
     function handleKeyDown(_event) {
         switch (_event.keyCode) {
             case 37:
@@ -11,8 +11,6 @@ var GameDrawPaths;
             case 39:
                 GameDrawPaths.players[1].xMovingDirection = 1;
                 break;
-        }
-        switch (_event.keyCode) {
             case 38:
                 GameDrawPaths.players[1].yMovingDirection = -1;
                 break;
@@ -61,4 +59,4 @@ var GameDrawPaths;
     }
     GameDrawPaths.handleKeyUp = handleKeyUp; //handleKeyUp zu
 })(GameDrawPaths || (GameDrawPaths = {})); //close Namespace
-//# sourceMappingURL=handleListener.js.map
+//# sourceMappingURL=HandleListener.js.map
